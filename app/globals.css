@@ -1,0 +1,319 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-jost), system-ui, sans-serif;
+  --font-bengali: var(--font-hind-siliguri), system-ui, sans-serif;
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* ═══════════════════════════════════════════════════════════════
+     CLEARR VISION - REFINED WHITE PREMIUM PALETTE
+     A sophisticated, clean white theme for luxury eyewear
+     ═══════════════════════════════════════════════════════════════ */
+
+  /* Background: Clean white with subtle warmth */
+  --background: #FAFAFA;
+  --foreground: #1A1A1A;
+
+  /* Card: Pure white elevated surfaces */
+  --card: #FFFFFF;
+  --card-foreground: #1A1A1A;
+
+  --popover: #FFFFFF;
+  --popover-foreground: #1A1A1A;
+
+  /* Primary: Rich Teal - the signature accent */
+  --primary: #0D9488;
+  --primary-foreground: #FFFFFF;
+
+  /* Secondary: Warm neutral for contrast */
+  --secondary: #F5F5F4;
+  --secondary-foreground: #1A1A1A;
+
+  /* Muted: Soft gray for backgrounds */
+  --muted: #F4F4F5;
+  --muted-foreground: #71717A;
+
+  /* Accent: Subtle overlay for interactions */
+  --accent: rgba(0, 0, 0, 0.04);
+  --accent-foreground: #1A1A1A;
+
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+
+  /* Borders: Elegant subtle gray lines */
+  --border: rgba(0, 0, 0, 0.08);
+  --input: rgba(0, 0, 0, 0.08);
+  --ring: #0D9488;
+
+  /* Glassmorphism - Light and airy */
+  --glass-border: rgba(0, 0, 0, 0.06);
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-blur: 20px;
+
+  /* Extended palette for gradients */
+  --teal-glow: rgba(13, 148, 136, 0.12);
+  --warm-glow: rgba(0, 0, 0, 0.03);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "ss02", "cv01";
+  }
+
+  /* Smooth scrolling with reduced motion respect */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* Custom selection color */
+  ::selection {
+    background: rgba(13, 148, 136, 0.2);
+    color: #1A1A1A;
+  }
+
+  /* Scrollbar styling for webkit browsers */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.25);
+  }
+}
+
+@layer utilities {
+  /* Noise texture - inlined as optimized SVG data URI */
+  .noise-texture {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+  }
+
+  /* Gradient text utility */
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-foreground via-foreground/90 to-foreground/60;
+  }
+
+  .gradient-text-primary {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-teal-600 to-primary;
+  }
+
+  /* Premium glass effect - optimized */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+  }
+
+  /* Soft glow utilities */
+  .glow-teal {
+    box-shadow: 0 0 40px -10px rgba(45, 212, 191, 0.4);
+  }
+
+  .glow-teal-lg {
+    box-shadow: 0 0 80px -20px rgba(45, 212, 191, 0.3);
+  }
+
+  /* Text balance for headlines */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Fade edges for overflow content */
+  .fade-edges {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  /* GPU acceleration hint */
+  .gpu {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════════════════ */
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - var(--gap, 1rem) / 2));
+  }
+}
+
+@keyframes marquee-reverse {
+  from {
+    transform: translateX(calc(-50% - var(--gap, 1rem) / 2));
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-marquee {
+  animation: marquee var(--duration, 30s) linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse var(--duration, 30s) linear infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.03) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   COMPONENT OVERRIDES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Links with subtle underline animation */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* Focus visible styles */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
