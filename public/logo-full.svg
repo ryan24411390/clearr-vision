@@ -1,0 +1,11 @@
+<svg width="400" height="150" viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Icon Part -->
+  <g transform="translate(0, 0) scale(0.6)">
+    <path d="M40 110 C40 140 65 160 85 160 C95 160 100 150 100 140 C100 150 105 160 115 160 C135 160 160 140 160 110" stroke="black" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M40 110 C40 80 70 70 100 110 C130 70 160 80 160 110" stroke="black" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  
+  <!-- Text Part -->
+  <text x="130" y="85" font-family="'Futura', 'Century Gothic', 'Tw Cen MT', sans-serif" font-size="42" font-weight="500" letter-spacing="2" fill="black">SMART</text>
+  <text x="130" y="125" font-family="'Futura', 'Century Gothic', 'Tw Cen MT', sans-serif" font-size="42" font-weight="500" letter-spacing="2" fill="black">READING</text>
+</svg>

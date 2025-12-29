@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function WhatsAppButton() {
     const phoneNumber = "8801704772663";
-    const message = "Hello! I am interested in Clearr Vision reading glasses.";
+    const message = "Hello! I am interested in Smart Reading reading glasses.";
     const [isHovered, setIsHovered] = useState(false);
 
     const handleClick = () => {

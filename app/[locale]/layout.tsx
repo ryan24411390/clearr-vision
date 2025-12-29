@@ -3,7 +3,7 @@ import { Jost, Hind_Siliguri } from "next/font/google";
 import "@/app/globals.css";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import Header from "@/components/layout/header";
+import Navbar from "@/components/layout/navbar/navbar";
 import Footer from "@/components/layout/footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import SmoothScroll from "@/components/layout/smooth-scroll";
@@ -25,7 +25,7 @@ const hindSiliguri = Hind_Siliguri({
 });
 
 export const metadata: Metadata = {
-  title: "Clearr Vision | The Class of Clarity",
+  title: "Smart Reading | The Class of Clarity",
   description: "Experience premium eyewear designed for the visionary. Order online with Cash on Delivery in Bangladesh.",
 };
 
@@ -48,8 +48,8 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <ToastProvider>
             <Preloader />
-            <Header />
-            <main className="flex-1">
+            <Navbar />
+            <main className="flex-1 pt-20">
               {children}
             </main>
             <Footer />

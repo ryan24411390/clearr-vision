@@ -137,8 +137,16 @@ export function CheckoutForm() {
         setLoading(true);
 
         try {
-            // Prepare order data
-            const orderData = {
+            // Calculate totals
+            const subtotal = getCartTotal();
+            const isInsideDhaka = formData.city === 'dhaka';
+            const totalQuantity = items.reduce((acc, item) => acc + item.quantity, 0);
+            const deliveryCharge = totalQuantity >= 2 ? 0 : (isInsideDhaka ? 60 : 100);
+            const total = subtotal + deliveryCharge;
+
+            // Create order payload
+            const orderPayload = {
+                orderType: 'cart' as const,
                 customer: {
                     name: `${formData.firstName} ${formData.lastName}`,
                     phone: formData.phone,
@@ -146,6 +154,7 @@ export function CheckoutForm() {
                     city: formData.city,
                     area: formData.area,
                 },
+                deliveryLocation: isInsideDhaka ? "Inside Dhaka" : "Outside Dhaka",
                 items: items.map((item) => ({
                     productId: item.productId,
                     name: item.name,
@@ -153,20 +162,38 @@ export function CheckoutForm() {
                     quantity: item.quantity,
                     variant: item.variant,
                 })),
-                total: getCartTotal(),
-                paymentMethod: "COD",
-                createdAt: new Date().toISOString(),
+                subtotal,
+                deliveryCharge,
+                total,
+                paymentMethod: 'COD',
             };
 
-            // Simulate API call
-            console.log("Order submitted:", orderData);
-            await new Promise((resolve) => setTimeout(resolve, 1500));
+            // Submit to API
+            const response = await fetch('/api/orders', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(orderPayload),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to submit order');
+            }
+
+            const result = await response.json();
+
+            // Store for success page
+            localStorage.setItem('lastOrder', JSON.stringify({
+                ...orderPayload,
+                orderNumber: result.orderNumber,
+            }));
 
             // Clear cart and redirect
             clearCart();
-            toast.success("Order placed successfully!");
+            toast.success(`Order #${result.orderNumber} placed successfully!`);
             router.push("/order-success");
-        } catch {
+        } catch (error) {
+            console.error('Order submission error:', error);
             toast.error("Failed to place order. Please try again.");
             setLoading(false);
         }

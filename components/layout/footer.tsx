@@ -4,6 +4,7 @@ import { Link } from "@/lib/navigation";
 import { Facebook, Instagram, Linkedin, ArrowRight, Smartphone, ShieldCheck } from "lucide-react";
 import { useTranslations } from 'next-intl';
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Footer() {
     const t = useTranslations('Footer');
@@ -122,10 +123,18 @@ export default function Footer() {
                     </div>
                 </div>
 
+
+
                 {/* Massive Brand Typography */}
-                <div className="border-t border-border pt-16 pb-12 overflow-hidden">
-                    <h1 className="text-[15vw] md:text-[13vw] leading-[0.8] font-black tracking-tighter text-muted/50 select-none text-center lg:text-left">
-                        CLEARR.
+                <div className="border-t border-border pt-16 pb-12 overflow-hidden flex flex-col items-center gap-6">
+                    <div className="relative w-16 h-16 md:w-24 md:h-24 opacity-20 grayscale hover:grayscale-0 transition-all duration-500">
+                        <Image src="/logo.png" alt="Smart Reading Mark" fill className="object-contain" />
+                    </div>
+                    <h1
+                        className="text-[12vw] md:text-[10vw] leading-[0.8] font-black tracking-tighter text-muted/50 select-none text-center lg:text-left"
+                        style={{ fontFamily: 'Futura, "Century Gothic", sans-serif' }}
+                    >
+                        SMART READING.
                     </h1>
                 </div>
 
@@ -142,7 +151,7 @@ export default function Footer() {
                         <Link href="/terms" className="hover:text-primary transition-colors">
                             {t('termsOfService')}
                         </Link>
-                        <span>© {new Date().getFullYear()} Clearr Vision</span>
+                        <span>© {new Date().getFullYear()} Smart Reading</span>
                     </div>
                 </div>
             </div>

@@ -15,8 +15,8 @@
     },
     "Hero": {
         "badge": "Redefining Vision",
-        "headline1": "CLEAR",
-        "headline2": "VISION",
+        "headline1": "SMART",
+        "headline2": "READING",
         "tagline": "Your eyes deserve better than generic frames from crowded stores. We craft precision eyewear for people who notice the difference.",
         "shopCta": "Explore Collection",
         "videoCta": "See the Craft"
@@ -58,7 +58,7 @@
         "deliveryDescription": "Free shipping over ৳1500. Track your order from our studio to your hands."
     },
     "WhyClearr": {
-        "sectionTitle": "The Clearr Difference",
+        "sectionTitle": "The Smart Reading Difference",
         "sectionDescription": "We're not another eyewear brand. We're opticians, designers, and perfectionists who got tired of overpriced, underwhelming glasses.",
         "freeDeliveryTitle": "On Us",
         "freeDeliveryDesc": "Free delivery on orders over ৳2000. No hidden fees, no surprises at checkout.",
@@ -131,7 +131,7 @@
         "findPowerDesc": "Don't know your power? We'll help you figure it out.",
         "theJournal": "The Journal",
         "theJournalDesc": "Eye care tips, style guides, and stories from our workshop.",
-        "ourStory": "About Clearr",
+        "ourStory": "About Smart Reading",
         "ourStoryDesc": "How a small team in Dhaka is changing how Bangladesh sees."
     },
     "MobileNav": {
@@ -156,7 +156,7 @@
         "heroDescription": "We believe great eyewear shouldn't require a prescription for your wallet. Advanced lenses, timeless design, fair prices.",
         "missionTitle": "Why We Started",
         "missionP1": "We noticed something strange: people spend 8+ hours a day staring at screens, yet most glasses are designed for a different era. They're either medical-looking or overpriced fashion statements.",
-        "missionP2": "Clearr Vision exists to fix that. We make glasses that look good, feel invisible on your face, and actually protect your eyes from the digital world—all without the designer markup.",
+        "missionP2": "Smart Reading exists to fix that. We make glasses that look good, feel invisible on your face, and actually protect your eyes from the digital world—all without the designer markup.",
         "coreValuesTitle": "What We Stand For",
         "coreValuesDesc": "These aren't corporate buzzwords. This is how we make decisions.",
         "precision": "Precision",

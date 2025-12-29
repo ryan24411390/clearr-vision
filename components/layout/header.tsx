@@ -1,7 +1,8 @@
 "use client";
 
 import { Link } from "@/lib/navigation";
-import { ShoppingCart, Menu, Search, Glasses } from "lucide-react";
+import { ShoppingCart, Menu, Search } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import MobileNav from "./mobile-nav";
@@ -88,14 +89,20 @@ export default function Header() {
 
                     <Link href="/" className="flex items-center gap-2.5 group">
                         <motion.div
-                            className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 border border-border"
+                            className="relative flex items-center justify-center w-10 h-10 rounded-lg"
                             whileHover={{ scale: 1.1, rotate: -5 }}
                             transition={{ type: "spring", stiffness: 400, damping: 17 }}
                         >
-                            <Glasses className="w-4 h-4 text-primary" />
+                            <Image
+                                src="/logo.png"
+                                alt="Smart Reading Logo"
+                                width={40}
+                                height={40}
+                                className="object-contain"
+                            />
                         </motion.div>
                         <span className="font-bold text-xl md:text-2xl text-foreground tracking-tight group-hover:text-primary transition-colors duration-300">
-                            Clearr Vision
+                            Smart Reading
                         </span>
                     </Link>
                 </div>

@@ -4,15 +4,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useToast } from "@/components/ui/toast";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { useTranslations } from 'next-intl';
 
 export default function ContactPage() {
     const t = useTranslations('Contact');
+    const toast = useToast();
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        alert("Message Sent (Simulation)");
+        toast.success("Message sent successfully!", { description: "We'll get back to you soon." });
     };
 
     return (

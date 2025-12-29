@@ -2,15 +2,15 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 export default function Preloader() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // Wait for document to be fully loaded, then animate out
         const handleLoad = () => {
-            // Small delay to ensure smooth transition
-            setTimeout(() => setIsLoading(false), 400);
+            // Extended delay for the "heavy" cinematic feel
+            setTimeout(() => setIsLoading(false), 800);
         };
 
         if (document.readyState === "complete") {
@@ -21,109 +21,70 @@ export default function Preloader() {
         }
     }, []);
 
+    const text = "Smart Reading";
+
     return (
         <AnimatePresence mode="wait">
             {isLoading && (
                 <motion.div
                     key="preloader"
-                    className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden"
-                    style={{ backgroundColor: "#FAFAFA" }}
+                    className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden backdrop-blur-3xl bg-background/40"
+                    initial={{ opacity: 1, backdropFilter: "blur(20px)" }}
+                    exit={{
+                        opacity: 0,
+                        backdropFilter: "blur(0px)",
+                        transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1] }
+                    }}
                 >
-                    {/* Cinematic Bars - Horizontal Wipe */}
-                    <motion.div
-                        className="absolute inset-0 z-20 flex flex-col"
-                        initial="initial"
-                        exit="exit"
-                    >
-                        {[...Array(5)].map((_, i) => (
-                            <motion.div
-                                key={i}
-                                className="flex-1 bg-[#FAFAFA]"
-                                initial={{ scaleX: 1 }}
-                                exit={{
-                                    scaleX: 0,
-                                    transition: {
-                                        duration: 0.6,
-                                        delay: i * 0.05,
-                                        ease: [0.76, 0, 0.24, 1]
-                                    }
-                                }}
-                                style={{
-                                    originX: i % 2 === 0 ? 0 : 1,
-                                }}
-                            />
-                        ))}
-                    </motion.div>
-
-                    {/* Central Logo Mark */}
                     <motion.div
                         className="relative z-10 flex flex-col items-center"
                         exit={{
                             opacity: 0,
-                            scale: 0.8,
+                            scale: 1.05,
                             filter: "blur(10px)",
-                            transition: { duration: 0.3 }
+                            transition: { duration: 0.8, ease: "easeInOut" }
                         }}
                     >
-                        {/* Animated Ring */}
+                        {/* Logo Animation */}
                         <motion.div
-                            className="relative w-20 h-20 mb-6"
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                            className="relative w-32 h-32 mb-8"
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
                         >
-                            <svg viewBox="0 0 80 80" className="w-full h-full">
-                                <circle
-                                    cx="40"
-                                    cy="40"
-                                    r="36"
-                                    fill="none"
-                                    stroke="rgba(0,0,0,0.1)"
-                                    strokeWidth="1"
-                                />
-                                <motion.circle
-                                    cx="40"
-                                    cy="40"
-                                    r="36"
-                                    fill="none"
-                                    stroke="url(#gradient)"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeDasharray="226"
-                                    strokeDashoffset="170"
-                                />
-                                <defs>
-                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stopColor="#2DD4BF" />
-                                        <stop offset="100%" stopColor="#0D9488" />
-                                    </linearGradient>
-                                </defs>
-                            </svg>
-
-                            {/* Center Dot */}
-                            <motion.div
-                                className="absolute inset-0 flex items-center justify-center"
-                                animate={{ scale: [1, 1.2, 1] }}
-                                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                            >
-                                <div className="w-2 h-2 rounded-full bg-gradient-to-br from-teal-400 to-teal-600" />
-                            </motion.div>
+                            <Image
+                                src="/logo.png"
+                                alt="Logo"
+                                fill
+                                className="object-contain drop-shadow-[0_0_25px_rgba(45,212,191,0.3)]"
+                                priority
+                            />
                         </motion.div>
 
-                        {/* Brand Text */}
+                        {/* Staggered Brand Text */}
                         <motion.div
-                            className="overflow-hidden"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.1 }}
+                            className="overflow-hidden flex gap-[0.1em]"
+                            initial={{ opacity: 1 }}
                         >
-                            <motion.span
-                                className="block text-sm font-medium tracking-[0.4em] text-foreground/50 uppercase"
-                                initial={{ y: 20 }}
-                                animate={{ y: 0 }}
-                                transition={{ delay: 0.15, ease: [0.33, 1, 0.68, 1] }}
-                            >
-                                Clearr Vision
-                            </motion.span>
+                            {text.split("").map((char, i) => (
+                                <motion.span
+                                    key={i}
+                                    className="block text-sm font-medium tracking-[0.2em] text-foreground/80 uppercase"
+                                    initial={{ y: 20, opacity: 0, filter: "blur(5px)" }}
+                                    animate={{
+                                        y: 0,
+                                        opacity: 1,
+                                        filter: "blur(0px)"
+                                    }}
+                                    transition={{
+                                        delay: 0.2 + (i * 0.03),
+                                        duration: 0.6,
+                                        ease: [0.33, 1, 0.68, 1]
+                                    }}
+                                >
+                                    {char === " " ? "\u00A0" : char}
+                                </motion.span>
+                            ))}
                         </motion.div>
                     </motion.div>
                 </motion.div>

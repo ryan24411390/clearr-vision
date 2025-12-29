@@ -23,7 +23,8 @@ export type Product = {
     discount?: string; // e.g. "42% discount"
     category: string; // "Reading Glasses"
     description: string; // The "Key Features" or "Full Package Includes" content
-    image: string;
+    image: string; // Primary image (first in gallery)
+    images: string[]; // All product images for gallery
 
     // Attributes for Display Table
     attributes: {
@@ -63,7 +64,7 @@ const RIMLESS_POWERS: PowerOption[] = [
 export const PRODUCTS: Product[] = [
     {
         id: "1515",
-        name: "Diamond Cut Anti BLU Reading",
+        name: "1515 – Diamond Cut Anti BLU Reading",
         slug: "diamond-cut-anti-blu-reading-1515",
         price: 350,
         category: "Reading Glasses",
@@ -74,7 +75,16 @@ Single vision Power
 Whole Bangladesh Delivery
 Exclusive Delivery Option
         `.trim(),
-        image: "/images/products/bold-black.jpg",
+        image: "/images/products/1515/1515-black.webp",
+        images: [
+            "/images/products/1515/1515-black.webp",
+            "/images/products/1515/bifocal-hd-1515.webp",
+            "/images/products/1515/black-1515.jpeg",
+            "/images/products/1515/bifocal-1515.jpeg",
+            "/images/products/1515/diamond-cut-1515.jpeg",
+            "/images/products/1515/1515-tr.jpeg",
+            "/images/products/1515/brown-1515.jpeg"
+        ],
         attributes: {
             modelNo: "1515 Blue Cut Reading Black",
             size: "Regular Size (Fit for Every Face)",
@@ -97,14 +107,25 @@ Exclusive Delivery Option
         price: 1190,
         category: "Reading Glasses",
         description: `
+Luxury Rimless Anti Blue
 Power and Non Power options
 Premium Quality
-Scratch Free
-Anti UV, Anti Radiation
-Tinted Color frames
+Scratch Free and Anti UV, Anti Radiation
+Tinted Color (Silver and Gold Frame)
 Whole Bangladesh Home Delivery
         `.trim(),
-        image: "/images/products/rimless-silver.jpg",
+        image: "/images/products/v004/v004-gold-1.jpeg",
+        images: [
+            "/images/products/v004/v004-gold-1.jpeg",
+            "/images/products/v004/v004-silver-1.webp",
+            "/images/products/v004/v004-silver-2.jpg",
+            "/images/products/v004/v004-gold-2.webp",
+            "/images/products/v004/v004-gold-3.jpg",
+            "/images/products/v004/v004-silver-3.jpg",
+            "/images/products/v004/v004-gold-4.jpeg",
+            "/images/products/v004/v004-gold-5.jpeg",
+            "/images/products/v004/v004-silver-4.jpeg"
+        ],
         attributes: {
             type: "Luxury Rimless Anti Blue",
             size: "Regular Size (Fit for Every Face)",
@@ -135,7 +156,18 @@ Scratch Free and Anti UV, Anti Radiation
 Tinted Color (Silver and Gold Frame)
 Whole Bangladesh Home Delivery
         `.trim(),
-        image: "/images/products/executive.jpg",
+        image: "/images/products/v007/v007-gold-1.jpeg",
+        images: [
+            "/images/products/v007/v007-gold-1.jpeg",
+            "/images/products/v007/v007-gold-2.webp",
+            "/images/products/v007/v007-model-1.jpg",
+            "/images/products/v007/v007-silver-1.jpeg",
+            "/images/products/v007/v007-model-2.jpg",
+            "/images/products/v007/v007-silver-2.jpeg",
+            "/images/products/v007/v007-gold-3.png",
+            "/images/products/v007/v007-silver-3.jpeg",
+            "/images/products/v007/v007-gold-4.jpeg"
+        ],
         attributes: {
             type: "Luxury Rimless Anti Blue Glasses",
             size: "Regular Size (Fit for Every Face)",
@@ -158,14 +190,26 @@ Whole Bangladesh Home Delivery
         price: 990,
         category: "Reading Glasses",
         description: `
+Luxury Rimless Anti Blue
 Power and Non Power options
 Premium Quality
-Scratch Free
-Anti UV, Anti Radiation
-Tinted Color frames
+Scratch Free and Anti UV, Anti Radiation
+Tinted Color (Silver and Gold Frame)
 Whole Bangladesh Home Delivery
         `.trim(),
-        image: "/images/products/ultra-blue.jpg",
+        image: "/images/products/v001/v001-main.webp",
+        images: [
+            "/images/products/v001/v001-main.webp",
+            "/images/products/v001/v001-2.jpg",
+            "/images/products/v001/v001-3.jpg",
+            "/images/products/v001/v001-4.jpeg",
+            "/images/products/v001/v001-5.png",
+            "/images/products/v001/v001-6.webp",
+            "/images/products/v001/v001-7.png",
+            "/images/products/v001/v001-8.webp",
+            "/images/products/v001/v001-9.webp",
+            "/images/products/v001/v001-10.webp"
+        ],
         attributes: {
             type: "Luxury Rimless Anti Blue",
             size: "Regular Size (Fit for Every Face)",

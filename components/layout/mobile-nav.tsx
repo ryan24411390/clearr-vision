@@ -64,7 +64,7 @@ export default function MobileNav() {
                         <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 border border-border">
                             <Glasses className="w-4 h-4 text-primary" />
                         </div>
-                        <span className="font-bold text-xl tracking-tight text-foreground">Clearr Vision</span>
+                        <span className="font-bold text-xl tracking-tight text-foreground">Smart Reading</span>
                     </Link>
                 </SheetClose>
                 <SheetClose asChild>
@@ -142,7 +142,7 @@ export default function MobileNav() {
                     <SocialLink href="#" icon={<Twitter className="w-5 h-5" />} label="Twitter" />
                 </div>
                 <p className="text-center text-[10px] text-muted-foreground mt-5 tracking-wide">
-                    © 2025 Clearr Vision. All rights reserved.
+                    © 2025 Smart Reading. All rights reserved.
                 </p>
             </div>
         </div>

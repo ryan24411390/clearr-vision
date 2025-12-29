@@ -24,3 +24,16 @@ export function formatPrice(price: number) {
     maximumFractionDigits: 0,
   }).format(price);
 }
+
+export const colorMap: Record<string, string> = {
+  "Black": "#000000",
+  "Brown": "#8B4513",
+  "Golden": "#FFD700",
+  "Silver": "#C0C0C0",
+  "Shining Gold": "#FFD700",
+  "Shining Silver": "#E8E8E8",
+  "Gunmetal": "#4a4a4a",
+  "Blue": "#0000FF",
+  "Red": "#FF0000",
+  "Rose Gold": "#B76E79",
+};

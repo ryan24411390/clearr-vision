@@ -76,7 +76,7 @@ export const useCartStore = create<CartState>()(
             },
         }),
         {
-            name: 'clearr-vision-cart', // unique name for localStorage
+            name: 'smart-reading-cart', // unique name for localStorage
         }
     )
 );

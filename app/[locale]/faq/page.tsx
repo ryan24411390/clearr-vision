@@ -27,7 +27,7 @@ export default function FAQPage() {
                 <AccordionItem value="item-2">
                     <AccordionTrigger>Do you offer blue light blocking?</AccordionTrigger>
                     <AccordionContent>
-                        Yes! All our Clearr Vision Pro lenses come with premium blue light blocking technology to protect your eyes from digital eye strain.
+                        Yes! All our Smart Reading Pro lenses come with premium blue light blocking technology to protect your eyes from digital eye strain.
                     </AccordionContent>
                 </AccordionItem>
 

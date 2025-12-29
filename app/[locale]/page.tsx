@@ -1,11 +1,9 @@
 "use client";
 
 import { useTranslations } from 'next-intl';
-import { StoryHero } from '@/components/sections/hero/story-hero';
-import { ProductShowcase } from '@/components/sections/product-showcase';
-import { BentoShowcase } from '@/components/sections/bento-showcase';
-import { WhyClearrSection } from '@/components/sections/why-clearr';
-import { QuizCTASection } from '@/components/sections/quiz-cta';
+import { SmartReadingHero } from '@/components/sections/hero/smart-reading-hero';
+import { FeaturedCollection } from '@/components/sections/featured-collection';
+
 import { TrustSection } from '@/components/sections/trust-section';
 import { Link } from '@/lib/navigation';
 import { Button } from "@/components/ui/button";
@@ -17,85 +15,48 @@ export default function Home() {
   const finalCta = useTranslations('FinalCTA');
 
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground overflow-x-hidden">
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
 
-      <StoryHero />
+      <SmartReadingHero />
 
-      <ProductShowcase />
-      <BentoShowcase />
+      <FeaturedCollection />
 
-      <WhyClearrSection />
 
-      <QuizCTASection />
 
       <TrustSection />
 
       {/* Final CTA Section */}
-      <section className="py-24 md:py-32 bg-background">
+      <section className="py-24 md:py-32 bg-zinc-900 text-white">
         <div className="container mx-auto px-4">
           <motion.div
-            className="relative rounded-3xl overflow-hidden bg-card border border-border p-12 md:p-20 lg:p-24"
+            className="relative rounded-3xl overflow-hidden p-12 md:p-24 text-center"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
             {/* Background Effects */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/5 pointer-events-none" />
-            <motion.div
-              className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] rounded-full bg-primary/10 blur-[100px] pointer-events-none"
-              animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            />
+            <div className="absolute inset-0 bg-gradient-to-tr from-zinc-800 to-zinc-900 pointer-events-none -z-10" />
 
-            {/* Content */}
-            <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center text-center gap-8">
-              <motion.h2
-                className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-              >
+            <div className="max-w-3xl mx-auto space-y-10">
+              <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter">
                 {finalCta('title')}
-              </motion.h2>
-
-              <motion.p
-                className="text-lg md:text-xl text-muted-foreground max-w-xl"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-              >
+              </h2>
+              <p className="text-xl md:text-2xl text-zinc-400 max-w-xl mx-auto font-light">
                 {finalCta('description')}
-              </motion.p>
+              </p>
 
-              <motion.div
-                className="flex flex-col sm:flex-row gap-4 mt-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-              >
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                 <Link href="/shop">
                   <Button
                     size="lg"
-                    className="h-14 px-8 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 text-base font-semibold glow-teal transition-all duration-300 group"
+                    className="h-16 px-10 rounded-full bg-white text-zinc-900 hover:bg-zinc-200 text-lg font-semibold transition-all duration-300"
                   >
                     {common('buyNow')}
-                    <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="w-5 h-5 ml-2" />
                   </Button>
                 </Link>
-                <Link href="/shop">
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="h-14 px-8 rounded-full border-border hover:border-primary hover:bg-primary/10 text-base font-semibold transition-all duration-300"
-                  >
-                    {finalCta('viewCollections')}
-                  </Button>
-                </Link>
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         </div>
