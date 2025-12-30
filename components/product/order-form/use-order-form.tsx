@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Product } from "@/lib/products";
-import { useCartStore } from "@/lib/store/cart";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/toast";
 
@@ -17,7 +16,6 @@ export interface FormErrors {
 export function useOrderForm(product: Product) {
     const router = useRouter();
     const toast = useToast();
-    const addItem = useCartStore((state) => state.addItem);
 
     // Selection States
     const [quantity, setQuantity] = useState<"1" | "2">("2");
@@ -35,7 +33,6 @@ export function useOrderForm(product: Product) {
     const [touched, setTouched] = useState<Record<string, boolean>>({});
 
     // Loading States
-    const [addingToCart, setAddingToCart] = useState(false);
     const [submittingOrder, setSubmittingOrder] = useState(false);
 
     // Derived Values
@@ -135,43 +132,6 @@ export function useOrderForm(product: Product) {
         }));
     };
 
-    const createCartItem = () => {
-        const variantId = `${color}-${power}`;
-        return {
-            id: `${product.id}-${variantId}`,
-            productId: product.id,
-            name: product.name,
-            price: price,
-            image: product.image,
-            quantity: qtyNum,
-            variant: {
-                color,
-                power,
-            },
-        };
-    };
-
-    const handleAddToCart = async () => {
-        if (!validateSelection()) return;
-
-        setAddingToCart(true);
-
-        // Small delay for UX feedback
-        await new Promise(resolve => setTimeout(resolve, 300));
-
-        addItem(createCartItem());
-
-        toast.success("Added to cart!", {
-            description: `${qtyNum}x ${product.name} (${color}, ${power})`,
-            action: {
-                label: "View Cart",
-                onClick: () => router.push("/checkout"),
-            }
-        });
-
-        setAddingToCart(false);
-    };
-
     const handlePlaceOrder = async () => {
         let isValid = validateSelection();
         isValid = validateCustomerDetails() && isValid; // Evaluate both
@@ -253,7 +213,6 @@ export function useOrderForm(product: Product) {
             address,
             errors,
             touched,
-            addingToCart,
             submittingOrder
         },
         setters: {
@@ -277,9 +236,8 @@ export function useOrderForm(product: Product) {
         },
         actions: {
             handleBlur,
-            handleAddToCart,
             handlePlaceOrder,
-            validateField // helper export if needed
+            validateField
         }
     };
 }

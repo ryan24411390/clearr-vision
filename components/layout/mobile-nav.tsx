@@ -6,8 +6,6 @@ import { useTranslations } from 'next-intl';
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { SheetClose } from "@/components/ui/sheet";
-import { useCartStore } from "@/lib/store/cart";
-import { useEffect, useState } from "react";
 import {
     Facebook,
     Instagram,
@@ -19,22 +17,10 @@ import {
     HelpCircle,
     User,
     Mail,
-    ShoppingCart,
+    MessageCircle,
     X
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-function CartCount() {
-    const itemCount = useCartStore(state => state.getItemCount());
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
-
-    if (!mounted) return null;
-    return itemCount;
-}
 
 export default function MobileNav() {
     const t = useTranslations('MobileNav');
@@ -95,20 +81,20 @@ export default function MobileNav() {
                     <motion.div variants={item}><NavLink href="/contact" icon={<Mail className="w-5 h-5" />} active={pathname.startsWith('/contact')}>{t('contact')}</NavLink></motion.div>
                 </nav>
 
-                {/* Cart Quick Access */}
+                {/* Order Inquiry */}
                 <motion.div variants={item} className="mt-6">
                     <SheetClose asChild>
-                        <Link href="/checkout" className="flex items-center justify-between p-4 rounded-2xl border border-border bg-muted/50 hover:bg-muted transition-colors group">
+                        <Link href="/contact" className="flex items-center justify-between p-4 rounded-2xl border border-border bg-muted/50 hover:bg-muted transition-colors group">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-primary/20 rounded-full text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                                    <ShoppingCart className="w-5 h-5" />
+                                    <MessageCircle className="w-5 h-5" />
                                 </div>
                                 <div>
-                                    <p className="font-semibold text-sm text-foreground">{t('yourCart')}</p>
-                                    <p className="text-xs text-muted-foreground"><CartCount /> {t('items')}</p>
+                                    <p className="font-semibold text-sm text-foreground">{t('needHelp')}</p>
+                                    <p className="text-xs text-muted-foreground">{t('contactForOrders')}</p>
                                 </div>
                             </div>
-                            <span className="text-xs font-medium text-primary group-hover:text-primary-foreground transition-colors">{t('viewCart')} →</span>
+                            <span className="text-xs font-medium text-primary group-hover:text-primary-foreground transition-colors">{t('contact')} →</span>
                         </Link>
                     </SheetClose>
                 </motion.div>

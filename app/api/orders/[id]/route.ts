@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 import { supabaseAdmin } from '@/lib/supabase/admin';
 
 // GET single order
@@ -6,8 +7,10 @@ export async function GET(
     request: NextRequest,
     { params }: { params: Promise<{ id: string }> }
 ) {
-    const authHeader = request.headers.get('x-admin-token');
-    if (authHeader !== process.env.ADMIN_SECRET_TOKEN) {
+    const cookieStore = await cookies();
+    const adminToken = cookieStore.get('admin_token')?.value;
+
+    if (adminToken !== process.env.ADMIN_SECRET_TOKEN) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -31,8 +34,10 @@ export async function PATCH(
     request: NextRequest,
     { params }: { params: Promise<{ id: string }> }
 ) {
-    const authHeader = request.headers.get('x-admin-token');
-    if (authHeader !== process.env.ADMIN_SECRET_TOKEN) {
+    const cookieStore = await cookies();
+    const adminToken = cookieStore.get('admin_token')?.value;
+
+    if (adminToken !== process.env.ADMIN_SECRET_TOKEN) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 

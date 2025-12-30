@@ -92,7 +92,7 @@ export function SmartReadingHero() {
                             <div className="flex items-center gap-2">
                                 <div className="flex -space-x-1">
                                     {[1, 2, 3, 4].map(i => (
-                                        <div key={i} className="w-6 h-6 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center overflow-hidden">
+                                        <div key={i} className="w-8 h-8 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center overflow-hidden">
                                             {/* Handing avatars or placeholders */}
                                             <div className="w-full h-full bg-zinc-300" />
                                         </div>

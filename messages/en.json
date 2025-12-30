@@ -144,11 +144,12 @@
         "aboutUs": "About Us",
         "contact": "Contact",
         "needHelp": "Got Questions?",
+        "contactForOrders": "Contact us for orders",
         "whatsappDesc": "Chat with a real person. Our team responds within minutes.",
         "whatsappButton": "Message Us",
         "yourCart": "Your Cart",
         "items": "items",
-        "viewCart": "View"
+        "viewCart": "View Cart"
     },
     "About": {
         "heroTitle": "Vision for the",

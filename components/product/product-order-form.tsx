@@ -88,9 +88,7 @@ export function ProductOrderForm({ product }: ProductOrderFormProps) {
                         isFreeDelivery={derived.isFreeDelivery}
                         location={state.location}
                         handlePlaceOrder={actions.handlePlaceOrder}
-                        handleAddToCart={actions.handleAddToCart}
                         submittingOrder={state.submittingOrder}
-                        addingToCart={state.addingToCart}
                     />
                 </div>
             </div>

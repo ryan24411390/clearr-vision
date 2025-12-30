@@ -131,7 +131,7 @@ export default function Footer() {
                         <Image src="/logo.png" alt="Smart Reading Mark" fill className="object-contain" />
                     </div>
                     <h1
-                        className="text-[12vw] md:text-[10vw] leading-[0.8] font-black tracking-tighter text-muted/50 select-none text-center lg:text-left"
+                        className="text-[10vw] md:text-[10vw] leading-[0.8] font-black tracking-tighter text-muted/50 select-none text-center lg:text-left"
                         style={{ fontFamily: 'Futura, "Century Gothic", sans-serif' }}
                     >
                         SMART READING.

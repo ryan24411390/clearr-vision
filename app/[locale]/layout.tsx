@@ -3,12 +3,9 @@ import { Jost, Hind_Siliguri } from "next/font/google";
 import "@/app/globals.css";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import Navbar from "@/components/layout/navbar/navbar";
-import Footer from "@/components/layout/footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import SmoothScroll from "@/components/layout/smooth-scroll";
-import Preloader from "@/components/ui/preloader";
 import { ToastProvider } from "@/components/ui/toast";
+import { LayoutWrapper } from "@/components/layout/LayoutWrapper";
 
 // Replaced Inter with "Jost" for a Futura-like geometric, premium feel
 const jost = Jost({
@@ -47,13 +44,9 @@ export default async function LocaleLayout({
         <SmoothScroll />
         <NextIntlClientProvider messages={messages}>
           <ToastProvider>
-            <Preloader />
-            <Navbar />
-            <main className="flex-1 pt-20">
+            <LayoutWrapper>
               {children}
-            </main>
-            <Footer />
-            <WhatsAppButton />
+            </LayoutWrapper>
           </ToastProvider>
         </NextIntlClientProvider>
       </body>

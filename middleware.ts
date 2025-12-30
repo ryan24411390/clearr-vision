@@ -5,7 +5,11 @@ export default createMiddleware({
     locales: ['en', 'bn'],
 
     // Used when no locale matches
-    defaultLocale: 'en'
+    defaultLocale: 'bn',
+
+    // Disable automatic locale detection based on Accept-Language header
+    // This ensures Bengali is always the default for new visitors
+    localeDetection: false
 });
 
 export const config = {

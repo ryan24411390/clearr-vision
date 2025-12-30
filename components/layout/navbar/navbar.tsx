@@ -1,34 +1,16 @@
 "use client";
 
 import { Link } from "@/lib/navigation";
-import { ShoppingCart, Menu, Search, User } from "lucide-react";
+import { MessageCircle, Menu, Search } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import MobileNav from "./mobile-nav";
-import { useCartStore } from "@/lib/store/cart";
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { CommandMenu } from "../command-menu";
 import { MegaMenu } from "../mega-menu";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-
-function CartBadge() {
-    const itemCount = useCartStore(state => state.getItemCount());
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
-
-    if (!mounted || itemCount === 0) return null;
-
-    return (
-        <span className="absolute -top-1.5 -right-1.5 h-4 w-4 rounded-full bg-primary text-[10px] font-bold text-primary-foreground flex items-center justify-center ring-2 ring-background">
-            {itemCount}
-        </span>
-    );
-}
 
 export default function Navbar() {
     const { scrollY } = useScroll();
@@ -109,21 +91,11 @@ export default function Navbar() {
                         <LanguageSwitcher />
                     </div>
 
-                    <Button variant="ghost" size="icon" className="hidden sm:flex" asChild>
-                        {/* Placeholder for user account if needed, currently not in original header but good for traditional layout. 
-                             Keeping it safe by just sticking to original actions for now unless requested. 
-                             Original had LanguageSwitcher, CommandMenu, Cart. */}
-                        <Link href="/account">
-                            <User className="h-5 w-5" />
-                            <span className="sr-only">Account</span>
-                        </Link>
-                    </Button>
-
+                    {/* Custom Symbol - Order Inquiry Link */}
                     <Button variant="ghost" size="icon" className="relative" asChild>
-                        <Link href="/checkout">
-                            <ShoppingCart className="h-5 w-5" />
-                            <CartBadge />
-                            <span className="sr-only">Cart</span>
+                        <Link href="/contact">
+                            <MessageCircle className="h-5 w-5" />
+                            <span className="sr-only">Order Inquiry</span>
                         </Link>
                     </Button>
                 </div>

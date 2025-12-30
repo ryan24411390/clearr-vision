@@ -5,6 +5,7 @@ import { ProductHero } from "@/components/product/product-hero";
 import { ProductFeatures } from "@/components/product/product-features";
 import { MobileStickyBar } from "@/components/product/mobile-sticky-bar";
 import { ProductRelated } from "@/components/product/product-related";
+import { TrackProductView } from "@/components/product/TrackProductView";
 import { PRODUCTS } from "@/lib/products";
 import { Check, ShieldCheck, Truck } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
@@ -26,6 +27,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
     return (
         <div className="min-h-screen bg-background">
+            {/* Track product view for recently viewed feature */}
+            <TrackProductView product={product} />
+
             {/* 1. Immersive Hero Section */}
             <ProductHero product={product} />
 

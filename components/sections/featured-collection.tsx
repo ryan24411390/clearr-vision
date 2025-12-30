@@ -91,7 +91,10 @@ function ProductSection({ product, index }: { product: any; index: number }) {
                                 <Button
                                     size="lg"
                                     variant="outline"
-                                    className={`h-14 px-10 rounded-full text-base font-semibold border-current hover:bg-white/10 transition-all duration-300 ${product.theme.textColor === 'text-white' ? 'hover:text-white' : 'hover:text-zinc-900'}`}
+                                    className={`h-14 px-10 rounded-full text-base font-semibold border-2 transition-all duration-300 bg-transparent ${product.theme.textColor === 'text-white'
+                                        ? 'border-white text-white hover:bg-white hover:text-black'
+                                        : 'border-zinc-900 text-zinc-900 hover:bg-zinc-900 hover:text-white'
+                                        }`}
                                 >
                                     Shop Now
                                     <ArrowRight className="w-5 h-5 ml-2" />

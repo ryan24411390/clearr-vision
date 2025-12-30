@@ -40,11 +40,11 @@ export function QuantitySelector({ quantity, setQuantity, price }: QuantitySelec
 
                 {/* Option 2 - Recommended */}
                 <label className={cn(
-                    "relative flex cursor-pointer flex-col rounded-xl border-2 p-4 transition-all hover:bg-muted/50",
+                    "relative flex cursor-pointer flex-col rounded-xl border-2 p-4 transition-all hover:bg-muted/50 pt-6",
                     quantity === '2' ? "border-primary bg-primary/10 shadow-md ring-2 ring-primary/20 ring-offset-2" : "border-muted bg-transparent"
                 )}>
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                        <span className="inline-block bg-primary text-primary-foreground text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">
+                    <div className="absolute -top-3 left-6">
+                        <span className="inline-block bg-primary text-primary-foreground text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg transform -rotate-2">
                             Best Value
                         </span>
                     </div>

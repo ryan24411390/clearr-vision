@@ -6,28 +6,11 @@ import { Link } from "@/lib/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogDescription,
-} from "@/components/ui/dialog";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
 import { formatCurrency } from "@/lib/utils";
-import { ShoppingCart, Plus, Eye, Check } from "lucide-react";
+import { ShoppingBag, Eye } from "lucide-react";
 import { useLocale } from "next-intl";
 import { Product } from "@/lib/products";
-import { useCartStore } from "@/lib/store/cart";
-import { useToast } from "@/components/ui/toast";
-import { useRouter } from "next/navigation";
+import { QuickOrderModal } from "./QuickOrderModal";
 
 interface ProductCardProps {
     product: Product;
@@ -35,62 +18,17 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
     const locale = useLocale();
-    const router = useRouter();
-    const toast = useToast();
-    const addItem = useCartStore((state) => state.addItem);
-
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const [color, setColor] = useState<string>("");
-    const [power, setPower] = useState<string>("");
-    const [isAdding, setIsAdding] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     // Calculate integer discount percentage if applicable
     const discount = (product.originalPrice && product.price < product.originalPrice)
         ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
         : 0;
 
-    const handleQuickAdd = (e: React.MouseEvent) => {
+    const handleBuyNow = (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
-        setIsDialogOpen(true);
-    };
-
-    const handleAddToCart = async () => {
-        if (!color || !power) {
-            toast.error("Please select color and power");
-            return;
-        }
-
-        setIsAdding(true);
-
-        const variantId = `${color}-${power}`;
-        addItem({
-            id: `${product.id}-${variantId}`,
-            productId: product.id,
-            name: product.name,
-            price: product.price,
-            image: product.image,
-            quantity: 1,
-            variant: {
-                color,
-                power,
-            },
-        });
-
-        await new Promise(resolve => setTimeout(resolve, 300));
-
-        toast.success("Added to cart!", {
-            description: `${product.name} (${color}, ${power})`,
-            action: {
-                label: "Checkout",
-                onClick: () => router.push("/checkout"),
-            },
-        });
-
-        setIsAdding(false);
-        setIsDialogOpen(false);
-        setColor("");
-        setPower("");
+        setIsModalOpen(true);
     };
 
     return (
@@ -117,15 +55,15 @@ export function ProductCard({ product }: ProductCardProps) {
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             />
 
-                            {/* Quick Add Overlay */}
+                            {/* Buy Now Overlay */}
                             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                 <Button
                                     size="sm"
-                                    onClick={handleQuickAdd}
+                                    onClick={handleBuyNow}
                                     className="bg-white text-black hover:bg-white/90 gap-2 shadow-lg"
                                 >
-                                    <Plus className="h-4 w-4" />
-                                    Quick Add
+                                    <ShoppingBag className="h-4 w-4" />
+                                    Buy Now
                                 </Button>
                             </div>
                         </div>
@@ -163,105 +101,24 @@ export function ProductCard({ product }: ProductCardProps) {
                                 Details
                             </Button>
                             <Button
-                                onClick={handleQuickAdd}
+                                onClick={handleBuyNow}
                                 className="flex-1 gap-2 bg-primary hover:bg-primary/90"
                                 size="sm"
                             >
-                                <ShoppingCart className="h-4 w-4" />
-                                Add
+                                <ShoppingBag className="h-4 w-4" />
+                                Buy Now
                             </Button>
                         </CardFooter>
                     </Card>
                 </Link>
             </div>
 
-            {/* Quick Add Dialog */}
-            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogContent className="sm:max-w-md bg-card border-border">
-                    <DialogHeader>
-                        <DialogTitle className="text-xl">Quick Add to Cart</DialogTitle>
-                        <DialogDescription>
-                            Select your options for {product.name}
-                        </DialogDescription>
-                    </DialogHeader>
-
-                    <div className="flex gap-4 py-4">
-                        <div className="relative w-24 h-24 rounded-lg overflow-hidden bg-muted flex-shrink-0">
-                            <Image
-                                src={product.image}
-                                alt={product.name}
-                                fill
-                                className="object-cover"
-                            />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                            <h4 className="font-semibold text-foreground line-clamp-2">
-                                {product.name}
-                            </h4>
-                            <p className="text-lg font-bold text-primary mt-1">
-                                {formatCurrency(product.price, locale)}
-                            </p>
-                        </div>
-                    </div>
-
-                    <div className="space-y-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="quick-color">Frame Color</Label>
-                            <Select value={color} onValueChange={setColor}>
-                                <SelectTrigger id="quick-color" className="bg-background border-border">
-                                    <SelectValue placeholder="Select color" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {product.availableColors.map((c) => (
-                                        <SelectItem key={c} value={c}>{c}</SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                        </div>
-
-                        <div className="space-y-2">
-                            <Label htmlFor="quick-power">Lens Power</Label>
-                            <Select value={power} onValueChange={setPower}>
-                                <SelectTrigger id="quick-power" className="bg-background border-border">
-                                    <SelectValue placeholder="Select power" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {product.availablePowers.map((p) => (
-                                        <SelectItem key={p} value={p}>{p}</SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                        </div>
-                    </div>
-
-                    <div className="flex gap-3 mt-4">
-                        <Button
-                            variant="outline"
-                            onClick={() => setIsDialogOpen(false)}
-                            className="flex-1 border-border"
-                        >
-                            Cancel
-                        </Button>
-                        <Button
-                            onClick={handleAddToCart}
-                            disabled={isAdding || !color || !power}
-                            className="flex-1 bg-primary hover:bg-primary/90 gap-2"
-                        >
-                            {isAdding ? (
-                                <>
-                                    <span className="h-4 w-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                                    Adding...
-                                </>
-                            ) : (
-                                <>
-                                    <Check className="h-4 w-4" />
-                                    Add to Cart
-                                </>
-                            )}
-                        </Button>
-                    </div>
-                </DialogContent>
-            </Dialog>
+            {/* Quick Order Modal */}
+            <QuickOrderModal
+                product={product}
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+            />
         </>
     );
 }

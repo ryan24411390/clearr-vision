@@ -54,7 +54,7 @@ export function ProductHero({ product }: ProductHeroProps) {
                     </h1>
 
                     <p className="text-xl text-zinc-600 dark:text-zinc-300 mb-8 leading-relaxed max-w-lg">
-                        {product.tagline || "Experience crystal clear vision with our premium collection. Designed for comfort, engineered for style."}
+                        Experience crystal clear vision with our premium collection. Designed for comfort, engineered for style.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">

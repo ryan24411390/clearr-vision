@@ -174,13 +174,13 @@ export function TrustSection() {
                             <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">
                                 {stat.value}
                             </div>
-                            <div className="text-sm text-muted-foreground">
+                            <div className="text-sm text-zinc-600 font-medium">
                                 {t(stat.labelKey)}
                             </div>
                         </div>
                     ))}
                 </motion.div>
-            </div>
-        </section>
+            </div >
+        </section >
     );
 }

@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 function CartCount() {
     const itemCount = useCartStore(state => state.getItemCount());
@@ -73,12 +74,15 @@ export default function MobileNav() {
                         <span className="font-bold text-xl tracking-tight text-foreground">Smart Reading</span>
                     </Link>
                 </SheetClose>
-                <SheetClose asChild>
-                    <Button variant="ghost" size="icon" className="rounded-full hover:bg-foreground/5 text-foreground/70 hover:text-foreground">
-                        <X className="h-5 w-5" />
-                        <span className="sr-only">Close menu</span>
-                    </Button>
-                </SheetClose>
+                <div className="flex items-center gap-2">
+                    <LanguageSwitcher />
+                    <SheetClose asChild>
+                        <Button variant="ghost" size="icon" className="rounded-full hover:bg-foreground/5 text-foreground/70 hover:text-foreground">
+                            <X className="h-5 w-5" />
+                            <span className="sr-only">Close menu</span>
+                        </Button>
+                    </SheetClose>
+                </div>
             </div>
 
             <motion.div

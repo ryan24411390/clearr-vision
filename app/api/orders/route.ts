@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 import { supabaseAdmin } from '@/lib/supabase/admin';
-import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 interface OrderItem {
     productId: string;
@@ -80,8 +78,7 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Send email notification (non-blocking)
-        sendOrderNotificationEmail(order).catch(console.error);
+        console.log('Order created:', order.order_number);
 
         return NextResponse.json({
             success: true,
@@ -99,9 +96,11 @@ export async function POST(request: NextRequest) {
 
 // GET - List orders (admin only)
 export async function GET(request: NextRequest) {
-    // Verify admin token from headers
-    const authHeader = request.headers.get('x-admin-token');
-    if (authHeader !== process.env.ADMIN_SECRET_TOKEN) {
+    // Verify admin token from cookie
+    const cookieStore = await cookies();
+    const adminToken = cookieStore.get('admin_token')?.value;
+
+    if (adminToken !== process.env.ADMIN_SECRET_TOKEN) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -128,71 +127,4 @@ export async function GET(request: NextRequest) {
     }
 
     return NextResponse.json({ orders: data, total: count });
-}
-
-async function sendOrderNotificationEmail(order: {
-    order_number: string;
-    order_type: string;
-    customer_name: string;
-    customer_phone: string;
-    customer_address: string;
-    customer_city?: string;
-    customer_area?: string;
-    delivery_location?: string;
-    items: OrderItem[];
-    subtotal: number;
-    delivery_charge: number;
-    total: number;
-    payment_method: string;
-}) {
-    const adminEmail = process.env.ADMIN_EMAIL;
-    if (!adminEmail) {
-        console.warn('ADMIN_EMAIL not configured, skipping email notification');
-        return;
-    }
-
-    const itemsList = order.items
-        .map((item: OrderItem) =>
-            `- ${item.name} x${item.quantity} (${item.variant?.color || 'N/A'}, ${item.variant?.power || 'N/A'}) - ৳${item.price * item.quantity}`
-        )
-        .join('\n');
-
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
-
-    try {
-        await resend.emails.send({
-            from: 'Clearr Vision Orders <onboarding@resend.dev>',
-            to: [adminEmail],
-            subject: `New Order: ${order.order_number}`,
-            text: `
-New order received!
-
-Order Number: ${order.order_number}
-Order Type: ${order.order_type}
-
-Customer Details:
-- Name: ${order.customer_name}
-- Phone: ${order.customer_phone}
-- Address: ${order.customer_address}
-- City: ${order.customer_city || 'N/A'}
-- Area: ${order.customer_area || 'N/A'}
-- Delivery Location: ${order.delivery_location || 'N/A'}
-
-Items:
-${itemsList}
-
-Subtotal: ৳${order.subtotal}
-Delivery: ৳${order.delivery_charge}
-Total: ৳${order.total}
-
-Payment Method: ${order.payment_method}
-
----
-View in admin: ${appUrl}/en/admin
-            `.trim(),
-        });
-        console.log('Order notification email sent successfully');
-    } catch (emailError) {
-        console.error('Failed to send order notification email:', emailError);
-    }
 }

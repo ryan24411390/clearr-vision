@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import { useMemo } from 'react';
 import { ProductCard } from "@/components/product/ProductCard";
+import { RecentlyViewed } from "@/components/sections/recently-viewed";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -157,6 +158,9 @@ export default function ShopPage() {
                     </Link>
                 </div>
             )}
+
+            {/* Recently Viewed Products */}
+            <RecentlyViewed />
         </div>
     );
 }

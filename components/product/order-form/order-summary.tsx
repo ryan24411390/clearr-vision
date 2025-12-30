@@ -1,4 +1,4 @@
-import { ArrowRight, Loader2, ShoppingCart, Truck } from "lucide-react";
+import { ArrowRight, Loader2, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/utils";
 import { useLocale } from "next-intl";
@@ -11,9 +11,7 @@ interface OrderSummaryProps {
     isFreeDelivery: boolean;
     location: "inside" | "outside";
     handlePlaceOrder: () => void;
-    handleAddToCart: () => void;
     submittingOrder: boolean;
-    addingToCart: boolean;
 }
 
 export function OrderSummary({
@@ -24,9 +22,7 @@ export function OrderSummary({
     isFreeDelivery,
     location,
     handlePlaceOrder,
-    handleAddToCart,
     submittingOrder,
-    addingToCart,
 }: OrderSummaryProps) {
     const locale = useLocale();
 
@@ -58,49 +54,25 @@ export function OrderSummary({
                 </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="space-y-3">
-                {/* Place Order - Primary */}
-                <Button
-                    type="button"
-                    onClick={handlePlaceOrder}
-                    className="w-full text-lg font-bold py-6 bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-primary/20"
-                    disabled={submittingOrder || addingToCart}
-                >
-                    {submittingOrder ? (
-                        <span className="flex items-center gap-2">
-                            <Loader2 className="h-5 w-5 animate-spin" />
-                            Processing Order...
-                        </span>
-                    ) : (
-                        <span className="flex items-center gap-2">
-                            Place Order (অর্ডার করুন)
-                            <ArrowRight className="h-5 w-5" />
-                        </span>
-                    )}
-                </Button>
-
-                {/* Add to Cart - Secondary */}
-                <Button
-                    type="button"
-                    variant="outline"
-                    onClick={handleAddToCart}
-                    className="w-full py-5 border-2 border-dashed border-primary/20 hover:border-primary hover:bg-primary/5 transition-all duration-300"
-                    disabled={addingToCart || submittingOrder}
-                >
-                    {addingToCart ? (
-                        <span className="flex items-center gap-2">
-                            <Loader2 className="h-4 w-4 animate-spin" />
-                            Adding...
-                        </span>
-                    ) : (
-                        <span className="flex items-center gap-2">
-                            <ShoppingCart className="h-4 w-4" />
-                            Add to Cart
-                        </span>
-                    )}
-                </Button>
-            </div>
+            {/* Place Order Button */}
+            <Button
+                type="button"
+                onClick={handlePlaceOrder}
+                className="w-full text-lg font-bold py-6 bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-primary/20"
+                disabled={submittingOrder}
+            >
+                {submittingOrder ? (
+                    <span className="flex items-center gap-2">
+                        <Loader2 className="h-5 w-5 animate-spin" />
+                        Processing Order...
+                    </span>
+                ) : (
+                    <span className="flex items-center gap-2">
+                        Place Order (অর্ডার করুন)
+                        <ArrowRight className="h-5 w-5" />
+                    </span>
+                )}
+            </Button>
 
             <div className="mt-4 flex flex-col items-center gap-2 text-xs text-muted-foreground">
                 <div className="flex items-center gap-4">

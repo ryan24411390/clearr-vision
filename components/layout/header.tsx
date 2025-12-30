@@ -1,44 +1,16 @@
 "use client";
 
 import { Link } from "@/lib/navigation";
-import { ShoppingCart, Menu, Search } from "lucide-react";
+import { MessageCircle, Menu, Search } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import MobileNav from "./mobile-nav";
-import { useCartStore } from "@/lib/store/cart";
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { CommandMenu } from "./command-menu";
 import { MegaMenu } from "./mega-menu";
-import { motion, useScroll, useMotionValueEvent, useTransform, AnimatePresence } from "framer-motion";
-import { useUIStore } from "@/lib/store/ui-store";
-
-function CartBadge() {
-    const itemCount = useCartStore(state => state.getItemCount());
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
-
-    if (!mounted || itemCount === 0) return null;
-
-    return (
-        <AnimatePresence mode="wait">
-            <motion.span
-                key={itemCount}
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0, opacity: 0 }}
-                transition={{ type: "spring", stiffness: 500, damping: 15 }}
-                className="absolute -top-2 -right-2 h-4 w-4 rounded-full bg-primary text-[10px] font-bold text-primary-foreground flex items-center justify-center"
-            >
-                {itemCount}
-            </motion.span>
-        </AnimatePresence>
-    );
-}
+import { motion, useScroll, useMotionValueEvent, useTransform } from "framer-motion";
 
 
 export default function Header() {
@@ -131,14 +103,12 @@ export default function Header() {
                         <LanguageSwitcher />
                     </motion.div>
 
+                    {/* Custom Symbol - Order Inquiry Link */}
                     <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                         <Button variant="ghost" size="icon" className="relative group rounded-full hover:bg-foreground/5 text-foreground/80 hover:text-foreground" asChild>
-                            <Link href="/checkout">
-                                <div className="relative">
-                                    <ShoppingCart className="h-5 w-5 group-hover:text-primary transition-colors duration-300" />
-                                    <CartBadge />
-                                </div>
-                                <span className="sr-only">Cart</span>
+                            <Link href="/contact">
+                                <MessageCircle className="h-5 w-5 group-hover:text-primary transition-colors duration-300" />
+                                <span className="sr-only">Order Inquiry</span>
                             </Link>
                         </Button>
                     </motion.div>

@@ -144,11 +144,12 @@
         "aboutUs": "আমাদের সম্পর্কে",
         "contact": "যোগাযোগ",
         "needHelp": "কোনো প্রশ্ন?",
+        "contactForOrders": "অর্ডারের জন্য যোগাযোগ করুন",
         "whatsappDesc": "একজন আসল মানুষের সাথে কথা বলুন। আমাদের টিম মিনিটের মধ্যে উত্তর দেয়।",
         "whatsappButton": "মেসেজ করুন",
         "yourCart": "আপনার ব্যাগ",
-        "items": "টি",
-        "viewCart": "দেখুন"
+        "items": "টি আইটেম",
+        "viewCart": "ব্যাগ দেখুন"
     },
     "About": {
         "heroTitle": "দৃষ্টি",

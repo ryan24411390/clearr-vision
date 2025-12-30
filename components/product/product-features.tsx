@@ -37,7 +37,7 @@ export function ProductFeatures({ description }: { description: string }) {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
                 {features.map((feature, idx) => (
                     <motion.div
                         key={idx}
@@ -45,13 +45,15 @@ export function ProductFeatures({ description }: { description: string }) {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: idx * 0.1 }}
-                        className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800"
+                        className="flex items-start gap-4 p-4 md:block md:p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800"
                     >
-                        <div className="mb-4 bg-white dark:bg-zinc-800 w-12 h-12 rounded-full flex items-center justify-center shadow-sm">
+                        <div className="shrink-0 mb-0 md:mb-4 bg-white dark:bg-zinc-800 w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center shadow-sm">
                             {feature.icon}
                         </div>
-                        <h4 className="font-semibold text-lg mb-2">{feature.title}</h4>
-                        <p className="text-sm text-muted-foreground">{feature.text}</p>
+                        <div>
+                            <h4 className="font-semibold text-lg mb-1 md:mb-2">{feature.title}</h4>
+                            <p className="text-sm text-muted-foreground leading-relaxed">{feature.text}</p>
+                        </div>
                     </motion.div>
                 ))}
             </div>
