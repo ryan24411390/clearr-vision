@@ -16,16 +16,16 @@ const STYLE_MAP = [
     { color: "bg-stone-100", textColor: "text-stone-800" },
 ];
 
-// Helper to provide better taglines than raw data might have
-const TAGLINES: Record<string, string> = {
-    "1515": "Diamond Cut Clarity",
-    "V004": "Rimless Elegance",
-    "V007": "The Modern Classic",
-    "V001": "Premium Essential",
+// Tagline keys map to translation keys
+const TAGLINE_KEYS: Record<string, string> = {
+    "1515": "tagline1515",
+    "V004": "taglineV004",
+    "V007": "taglineV007",
+    "V001": "taglineV001",
 };
 
 export function FeaturedCollection() {
-    const t = useTranslations('Common'); // Or a relevant namespace if needed
+    const t = useTranslations('FeaturedCollection');
 
     return (
         <section className="py-0 bg-background">
@@ -33,19 +33,21 @@ export function FeaturedCollection() {
                 // Cycle through styles
                 const style = STYLE_MAP[index % STYLE_MAP.length];
 
-                // Clean description for display (taking first line or summary)
-                const cleanDesc = product.description.split('\n')[0];
+                // Get translated tagline
+                const taglineKey = TAGLINE_KEYS[product.id] || "defaultTagline";
+                const tagline = t(taglineKey);
 
                 return (
                     <ProductSection
                         key={product.id}
                         product={{
                             ...product,
-                            tagline: TAGLINES[product.id] || "Premium Collection",
-                            displayDesc: product.description, // Pass full description, we might truncate in component
+                            tagline,
+                            displayDesc: product.description,
                             theme: style
                         }}
                         index={index}
+                        t={t}
                     />
                 );
             })}
@@ -53,7 +55,7 @@ export function FeaturedCollection() {
     );
 }
 
-function ProductSection({ product, index }: { product: any; index: number }) {
+function ProductSection({ product, index, t }: { product: any; index: number; t: any }) {
     const isEven = index % 2 === 0;
 
     return (
@@ -71,7 +73,7 @@ function ProductSection({ product, index }: { product: any; index: number }) {
                     >
                         <div className="space-y-4">
                             <span className="text-sm font-medium tracking-[0.2em] uppercase opacity-70">
-                                Collection 0{index + 1}
+                                {t('collectionPrefix')} 0{index + 1}
                             </span>
                             <h2 className="text-5xl md:text-7xl font-bold tracking-tight">
                                 {product.name}
@@ -96,7 +98,7 @@ function ProductSection({ product, index }: { product: any; index: number }) {
                                         : 'border-zinc-900 text-zinc-900 hover:bg-zinc-900 hover:text-white'
                                         }`}
                                 >
-                                    Shop Now
+                                    {t('shopNow')}
                                     <ArrowRight className="w-5 h-5 ml-2" />
                                 </Button>
                             </Link>

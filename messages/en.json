@@ -349,5 +349,24 @@
         "bundleTitle": "Get the Care Bundle",
         "bundleDesc": "All our glasses come with a premium case and microfiber cloth. Add the complete care kit to keep your frames pristine.",
         "shopButton": "Shop Glasses"
+    },
+    "SmartReadingHero": {
+        "headline1": "Crystal Clear",
+        "headline2": "Adaptive Vision",
+        "description": "Experience the future of eyewear with our intelligent adaptive lenses. Seamlessly transitions between reading and distance vision, offering unparalleled clarity in every environment.",
+        "shopCollectionCta": "Shop Collection",
+        "howItWorksCta": "How it Works",
+        "trustTrial": "30-Day Trial",
+        "trustShipping": "Free Shipping",
+        "rating": "4.9/5"
+    },
+    "FeaturedCollection": {
+        "collectionPrefix": "Collection",
+        "shopNow": "Shop Now",
+        "tagline1515": "Diamond Cut Clarity",
+        "taglineV004": "Rimless Elegance",
+        "taglineV007": "The Modern Classic",
+        "taglineV001": "Premium Essential",
+        "defaultTagline": "Premium Collection"
     }
 }

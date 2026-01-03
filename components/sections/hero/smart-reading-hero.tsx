@@ -9,8 +9,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 
 export function SmartReadingHero() {
-    // using 'Common' or specific namespaces would be better, but falling back to hardcoded for design first if translations missing
-    const t = useTranslations("StoryHero");
+    const t = useTranslations("SmartReadingHero");
 
     return (
         <section className="relative w-full overflow-hidden bg-background pt-32 pb-12 md:pt-40 md:pb-24 lg:pt-48 lg:pb-32">
@@ -38,9 +37,9 @@ export function SmartReadingHero() {
                             transition={{ duration: 0.6, delay: 0.1 }}
                         >
                             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.1]">
-                                Crystal Clear <br />
+                                {t('headline1')} <br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-teal-400">
-                                    Adaptive Vision
+                                    {t('headline2')}
                                 </span>
                             </h1>
                         </motion.div>
@@ -51,9 +50,7 @@ export function SmartReadingHero() {
                             transition={{ duration: 0.6, delay: 0.2 }}
                             className="text-lg md:text-xl text-muted-foreground leading-relaxed md:max-w-xl mx-auto lg:mx-0"
                         >
-                            Experience the future of eyewear with our intelligent adaptive lenses.
-                            Seamlessly transitions between reading and distance vision, offering
-                            unparalleled clarity in every environment.
+                            {t('description')}
                         </motion.div>
 
                         <motion.div
@@ -64,13 +61,13 @@ export function SmartReadingHero() {
                         >
                             <Link href="/shop">
                                 <Button size="lg" className="h-14 px-8 rounded-full text-base font-semibold shadow-lg shadow-teal-500/20 hover:shadow-teal-500/30 transition-all">
-                                    Shop Collection
+                                    {t('shopCollectionCta')}
                                     <ArrowRight className="w-5 h-5 ml-2" />
                                 </Button>
                             </Link>
                             <Link href="/about">
                                 <Button variant="outline" size="lg" className="h-14 px-8 rounded-full text-base border-2 hover:bg-secondary/50">
-                                    How it Works
+                                    {t('howItWorksCta')}
                                 </Button>
                             </Link>
                         </motion.div>
@@ -83,11 +80,11 @@ export function SmartReadingHero() {
                         >
                             <div className="flex items-center gap-2">
                                 <CheckCircle2 className="w-4 h-4 text-teal-500" />
-                                <span>30-Day Trial</span>
+                                <span>{t('trustTrial')}</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <CheckCircle2 className="w-4 h-4 text-teal-500" />
-                                <span>Free Shipping</span>
+                                <span>{t('trustShipping')}</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <div className="flex -space-x-1">
@@ -100,7 +97,7 @@ export function SmartReadingHero() {
                                 </div>
                                 <div className="flex items-center gap-1">
                                     <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                                    <span className="font-semibold text-foreground">4.9/5</span>
+                                    <span className="font-semibold text-foreground">{t('rating')}</span>
                                 </div>
                             </div>
                         </motion.div>
