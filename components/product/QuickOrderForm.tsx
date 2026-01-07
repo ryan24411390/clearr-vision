@@ -1,16 +1,13 @@
 "use client";
 
-import { Zap } from "lucide-react";
 import { Product } from "@/lib/products";
 import { useOrderForm } from "./order-form/use-order-form";
-import { FormSection, SectionHeader } from "./order-form/form-section";
+import { SectionHeader } from "./order-form/form-section";
 import { QuantitySelector } from "./order-form/quantity-selector";
 import { DeliverySelector } from "./order-form/delivery-selector";
 import { ProductOptions } from "./order-form/product-options";
 import { CustomerDetails } from "./order-form/customer-details";
 import { OrderSummary } from "./order-form/order-summary";
-import { useEffect } from "react";
-
 interface QuickOrderFormProps {
     product: Product;
 }
@@ -22,29 +19,6 @@ export function QuickOrderForm({ product }: QuickOrderFormProps) {
         derived,
         actions
     } = useOrderForm(product);
-
-    // Initial Facebook ViewContent event
-    useEffect(() => {
-        // Facebook Pixel logic would go here
-        if (typeof window !== 'undefined' && 'fbq' in window) {
-            // @ts-ignore
-            window.fbq('track', 'ViewContent', {
-                content_name: product.name_en,
-                content_ids: [product.id],
-                content_type: 'product',
-                value: product.price,
-                currency: 'BDT'
-            });
-        }
-    }, [product]);
-
-    const handleQuickOrder = async () => {
-        await actions.handlePlaceOrder();
-
-        // Fire Purchase event logic is ideally handled on the success page or here if we intercepted it.
-        // Since handlePlaceOrder handles the redirect, we rely on the implementation plan's verifying step 
-        // or subsequent updates to OrderSuccessPage if needed.
-    };
 
     return (
         <div className="bg-white dark:bg-zinc-900 rounded-[2rem] shadow-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden max-w-md mx-auto relative">
@@ -67,13 +41,13 @@ export function QuickOrderForm({ product }: QuickOrderFormProps) {
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src={product.images[0]}
-                            alt={product.name_en}
+                            alt={product.name}
                             className="w-48 h-48 sm:w-56 sm:h-56 object-cover rounded-2xl shadow-lg relative z-10 transform transition duration-500 group-hover:scale-105"
                         />
                     </div>
 
                     <div className="space-y-1">
-                        <h4 className="font-bold text-xl leading-tight text-foreground">{product.name_bn || product.name_en}</h4>
+                        <h4 className="font-bold text-xl leading-tight text-foreground">{product.name}</h4>
                         <p className="text-2xl font-extrabold text-primary">Tk {product.price}</p>
                     </div>
                 </div>
@@ -133,7 +107,7 @@ export function QuickOrderForm({ product }: QuickOrderFormProps) {
                     deliveryCharge={derived.deliveryCharge}
                     isFreeDelivery={derived.isFreeDelivery}
                     location={state.location}
-                    handlePlaceOrder={handleQuickOrder}
+                    handlePlaceOrder={actions.handlePlaceOrder}
                     submittingOrder={state.submittingOrder}
                 />
             </div>

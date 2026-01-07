@@ -261,7 +261,7 @@ export function useOrderForm(product: Product) {
             if (typeof window !== 'undefined' && 'fbq' in window) {
                 // @ts-ignore
                 window.fbq('track', 'Purchase', {
-                    content_name: product.name_en,
+                    content_name: product.name,
                     content_ids: [product.id],
                     content_type: 'product',
                     value: total,
