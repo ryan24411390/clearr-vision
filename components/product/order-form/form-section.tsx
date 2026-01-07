@@ -7,8 +7,8 @@ interface FormSectionProps {
 
 export function FormSection({ children, className }: FormSectionProps) {
     return (
-        <div className={cn("rounded-xl border bg-card/50 p-4 space-y-6", className)}>
-            <div className="space-y-4">
+        <div className={cn("space-y-6", className)}>
+            <div className="space-y-6">
                 {children}
             </div>
         </div>

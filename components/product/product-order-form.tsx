@@ -23,23 +23,32 @@ export function ProductOrderForm({ product }: ProductOrderFormProps) {
     } = useOrderForm(product);
 
     return (
-        <div className="relative overflow-hidden rounded-2xl border bg-background/50 backdrop-blur-xl shadow-2xl ring-1 ring-white/20">
+        <div className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 dark:bg-black/20 backdrop-blur-md shadow-2xl ring-1 ring-black/5">
             {/* Header Accent */}
-            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary via-purple-500 to-primary" />
+            <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-primary/80 via-purple-500/80 to-primary/80" />
 
-            <div className="p-4 md:p-6 space-y-6">
-                <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
-                        Order Now <span className="text-base font-normal text-muted-foreground">(অর্ডার করুন)</span>
-                    </h3>
+            {/* Ambient Glow */}
+            <div className="absolute -top-20 -right-20 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-primary/20 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="p-5 md:p-8 space-y-8 relative">
+                <div className="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
+                            অর্ডার করুন
+                        </h3>
+                        <p className="text-sm text-muted-foreground mt-1">আপনার পছন্দের চশমাটি পেতে ফর্মটি পূরণ করুন</p>
+                    </div>
                     {derived.isFreeDelivery && (
-                        <span className="animate-pulse inline-flex items-center rounded-full bg-green-500/10 px-3 py-1 text-xs font-medium text-green-500 ring-1 ring-inset ring-green-600/20">
-                            <Zap className="mr-1 h-3 w-3" /> Free Delivery
-                        </span>
+                        <div className="hidden md:flex flex-col items-end">
+                            <span className="animate-pulse inline-flex items-center rounded-full bg-green-500/10 px-3 py-1 text-xs font-medium text-green-600 ring-1 ring-inset ring-green-600/20">
+                                <Zap className="mr-1 h-3 w-3" /> ফ্রি ডেলিভারি
+                            </span>
+                        </div>
                     )}
                 </div>
 
-                <div className="space-y-6">
+                <div className="space-y-8">
                     <FormSection>
                         <QuantitySelector
                             quantity={state.quantity}
@@ -64,7 +73,7 @@ export function ProductOrderForm({ product }: ProductOrderFormProps) {
                         />
                     </FormSection>
 
-                    <FormSection className="pt-4">
+                    <FormSection className="pt-2">
                         <CustomerDetails
                             customerName={state.customerName}
                             setCustomerName={setters.setCustomerName}

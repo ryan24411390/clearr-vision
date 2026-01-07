@@ -5,13 +5,11 @@ import Image from "next/image";
 import { Link } from "@/lib/navigation";
 import { useRecentlyViewedStore } from "@/lib/store/recently-viewed";
 import { formatCurrency } from "@/lib/utils";
-import { useLocale } from "next-intl";
 import { Clock, ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 export function RecentlyViewed() {
-    const locale = useLocale();
     const products = useRecentlyViewedStore(state => state.products);
     const [mounted, setMounted] = useState(false);
 
@@ -38,13 +36,13 @@ export function RecentlyViewed() {
                             <Clock className="h-5 w-5 text-primary" />
                         </div>
                         <div>
-                            <h2 className="text-xl md:text-2xl font-bold">Recently Viewed</h2>
-                            <p className="text-sm text-muted-foreground">Continue where you left off</p>
+                            <h2 className="text-xl md:text-2xl font-bold">সম্প্রতি দেখেছেন</h2>
+                            <p className="text-sm text-muted-foreground">যেসব প্রোডাক্ট আপনি দেখেছেন</p>
                         </div>
                     </div>
                     <Button variant="ghost" size="sm" asChild className="hidden sm:flex">
                         <Link href="/shop" className="gap-2">
-                            View All <ArrowRight className="h-4 w-4" />
+                            সব দেখুন <ArrowRight className="h-4 w-4" />
                         </Link>
                     </Button>
                 </div>
@@ -72,11 +70,11 @@ export function RecentlyViewed() {
                                     </h3>
                                     <div className="mt-2 flex items-baseline gap-2">
                                         <span className="font-bold text-primary">
-                                            {formatCurrency(product.price, locale)}
+                                            {formatCurrency(product.price)}
                                         </span>
                                         {product.originalPrice && (
                                             <span className="text-xs text-muted-foreground line-through">
-                                                {formatCurrency(product.originalPrice, locale)}
+                                                {formatCurrency(product.originalPrice)}
                                             </span>
                                         )}
                                     </div>
@@ -90,7 +88,7 @@ export function RecentlyViewed() {
                 <div className="mt-6 sm:hidden">
                     <Button variant="outline" className="w-full" asChild>
                         <Link href="/shop" className="gap-2">
-                            View All Products <ArrowRight className="h-4 w-4" />
+                            সব প্রোডাক্ট দেখুন <ArrowRight className="h-4 w-4" />
                         </Link>
                     </Button>
                 </div>

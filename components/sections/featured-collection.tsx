@@ -6,7 +6,6 @@ import { Link } from "@/lib/navigation";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { PRODUCTS } from "@/lib/products";
-import { useTranslations } from "next-intl";
 
 // Helper to provide styling per product index to keep the aesthetic variety
 const STYLE_MAP = [
@@ -16,26 +15,23 @@ const STYLE_MAP = [
     { color: "bg-stone-100", textColor: "text-stone-800" },
 ];
 
-// Tagline keys map to translation keys
-const TAGLINE_KEYS: Record<string, string> = {
-    "1515": "tagline1515",
-    "V004": "taglineV004",
-    "V007": "taglineV007",
-    "V001": "taglineV001",
+// Taglines for each product (Bengali)
+const TAGLINES: Record<string, string> = {
+    "1515": "ডায়মন্ড কাট ক্ল্যারিটি",
+    "V004": "রিমলেস এলিগ্যান্স",
+    "V007": "মডার্ন ক্লাসিক",
+    "V001": "প্রিমিয়াম এসেনশিয়াল",
 };
 
 export function FeaturedCollection() {
-    const t = useTranslations('FeaturedCollection');
-
     return (
         <section className="py-0 bg-background">
             {PRODUCTS.map((product, index) => {
                 // Cycle through styles
                 const style = STYLE_MAP[index % STYLE_MAP.length];
 
-                // Get translated tagline
-                const taglineKey = TAGLINE_KEYS[product.id] || "defaultTagline";
-                const tagline = t(taglineKey);
+                // Get tagline
+                const tagline = TAGLINES[product.id] || "প্রিমিয়াম কালেকশন";
 
                 return (
                     <ProductSection
@@ -47,7 +43,6 @@ export function FeaturedCollection() {
                             theme: style
                         }}
                         index={index}
-                        t={t}
                     />
                 );
             })}
@@ -55,7 +50,7 @@ export function FeaturedCollection() {
     );
 }
 
-function ProductSection({ product, index, t }: { product: any; index: number; t: any }) {
+function ProductSection({ product, index }: { product: any; index: number }) {
     const isEven = index % 2 === 0;
 
     return (
@@ -73,7 +68,7 @@ function ProductSection({ product, index, t }: { product: any; index: number; t:
                     >
                         <div className="space-y-4">
                             <span className="text-sm font-medium tracking-[0.2em] uppercase opacity-70">
-                                {t('collectionPrefix')} 0{index + 1}
+                                কালেকশন 0{index + 1}
                             </span>
                             <h2 className="text-5xl md:text-7xl font-bold tracking-tight">
                                 {product.name}
@@ -98,7 +93,7 @@ function ProductSection({ product, index, t }: { product: any; index: number; t:
                                         : 'border-zinc-900 text-zinc-900 hover:bg-zinc-900 hover:text-white'
                                         }`}
                                 >
-                                    {t('shopNow')}
+                                    এখনই কিনুন
                                     <ArrowRight className="w-5 h-5 ml-2" />
                                 </Button>
                             </Link>

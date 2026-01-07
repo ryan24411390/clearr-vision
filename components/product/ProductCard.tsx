@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { formatCurrency } from "@/lib/utils";
 import { ShoppingBag, Eye } from "lucide-react";
-import { useLocale } from "next-intl";
 import { Product } from "@/lib/products";
 import { QuickOrderModal } from "./QuickOrderModal";
 
@@ -17,7 +16,6 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-    const locale = useLocale();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     // Calculate integer discount percentage if applicable
@@ -44,7 +42,7 @@ export function ProductCard({ product }: ProductCardProps) {
                             )}
                             {product.isNew && !discount && (
                                 <Badge className="absolute left-2 top-2 z-10 bg-primary">
-                                    New
+                                    নতুন
                                 </Badge>
                             )}
                             <Image
@@ -63,30 +61,30 @@ export function ProductCard({ product }: ProductCardProps) {
                                     className="bg-white text-black hover:bg-white/90 gap-2 shadow-lg"
                                 >
                                     <ShoppingBag className="h-4 w-4" />
-                                    Buy Now
+                                    এখনই কিনুন
                                 </Button>
                             </div>
                         </div>
-                        <CardContent className="p-4 pt-4 flex-1">
+                        <CardContent className="p-4 pt-4 flex-1 flex flex-col items-center text-center">
                             <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">
                                 {product.category}
                             </p>
                             <h3 className="font-semibold text-base line-clamp-2 group-hover:text-primary transition-colors min-h-[2.5rem]">
                                 {product.name}
                             </h3>
-                            <div className="mt-2 flex items-baseline gap-2">
+                            <div className="mt-2 flex items-center justify-center gap-2">
                                 {product.originalPrice ? (
                                     <>
                                         <span className="font-bold text-lg text-primary">
-                                            {formatCurrency(product.price, locale)}
+                                            {formatCurrency(product.price)}
                                         </span>
                                         <span className="text-sm text-muted-foreground line-through">
-                                            {formatCurrency(product.originalPrice, locale)}
+                                            {formatCurrency(product.originalPrice)}
                                         </span>
                                     </>
                                 ) : (
                                     <span className="font-bold text-lg">
-                                        {formatCurrency(product.price, locale)}
+                                        {formatCurrency(product.price)}
                                     </span>
                                 )}
                             </div>
@@ -98,7 +96,7 @@ export function ProductCard({ product }: ProductCardProps) {
                                 size="sm"
                             >
                                 <Eye className="h-4 w-4" />
-                                Details
+                                বিস্তারিত
                             </Button>
                             <Button
                                 onClick={handleBuyNow}
@@ -106,7 +104,7 @@ export function ProductCard({ product }: ProductCardProps) {
                                 size="sm"
                             >
                                 <ShoppingBag className="h-4 w-4" />
-                                Buy Now
+                                এখনই কিনুন
                             </Button>
                         </CardFooter>
                     </Card>

@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import MobileNav from "./mobile-nav";
 import { useState, useRef } from "react";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { CommandMenu } from "../command-menu";
 import { MegaMenu } from "../mega-menu";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
@@ -42,7 +41,7 @@ export default function Navbar() {
                         <SheetTrigger asChild>
                             <Button variant="ghost" size="icon" className="md:hidden">
                                 <Menu className="h-6 w-6" />
-                                <span className="sr-only">Toggle menu</span>
+                                <span className="sr-only">মেনু খুলুন</span>
                             </Button>
                         </SheetTrigger>
                         <SheetContent side="left" className="w-[300px] sm:w-[350px] p-0">
@@ -87,15 +86,11 @@ export default function Navbar() {
                         </CommandMenu>
                     </div>
 
-                    <div className="hidden sm:block">
-                        <LanguageSwitcher />
-                    </div>
-
                     {/* Custom Symbol - Order Inquiry Link */}
                     <Button variant="ghost" size="icon" className="relative" asChild>
                         <Link href="/contact">
                             <MessageCircle className="h-5 w-5" />
-                            <span className="sr-only">Order Inquiry</span>
+                            <span className="sr-only">অর্ডার জিজ্ঞাসা</span>
                         </Link>
                     </Button>
                 </div>

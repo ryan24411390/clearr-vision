@@ -21,7 +21,7 @@ export function ProductRelated({ currentSlug, products }: ProductRelatedProps) {
 
     return (
         <section className="py-12 border-t">
-            <h2 className="text-2xl font-bold mb-8 text-center">You Might Also Like</h2>
+            <h2 className="text-2xl font-bold mb-8 text-center">আপনার পছন্দ হতে পারে</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {relatedProducts.map((product) => (
                     <Link
@@ -39,7 +39,7 @@ export function ProductRelated({ currentSlug, products }: ProductRelatedProps) {
                                 />
                                 {product.isOnSale && (
                                     <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">
-                                        Sale
+                                        সেল
                                     </Badge>
                                 )}
                             </div>

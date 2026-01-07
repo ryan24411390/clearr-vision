@@ -9,7 +9,8 @@ import {
     Users,
     Settings,
     LogOut,
-    ChevronRight
+    ChevronRight,
+    Activity
 } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -20,7 +21,8 @@ const sidebarItems = [
     { icon: ShoppingBag, label: "Orders", href: "/admin/orders" },
     { icon: Package, label: "Products", href: "/admin/products" },
     { icon: Users, label: "Customers", href: "/admin/customers" },
-    // { icon: Settings, label: "Settings", href: "/admin/settings" },
+    { icon: Activity, label: "Activity Logs", href: "/admin/activity" },
+    { icon: Settings, label: "Settings", href: "/admin/settings" },
 ];
 
 export function AdminSidebar({ className }: { className?: string }) {

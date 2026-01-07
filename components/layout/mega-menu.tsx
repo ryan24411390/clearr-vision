@@ -4,7 +4,6 @@ import * as React from "react"
 import { motion } from "framer-motion"
 import { Link } from "@/lib/navigation"
 import { cn } from "@/lib/utils"
-import { useTranslations } from 'next-intl'
 import { usePathname } from "next/navigation"
 import {
     NavigationMenu,
@@ -52,7 +51,6 @@ const ListItem = React.forwardRef<
 ListItem.displayName = "ListItem"
 
 export function MegaMenu() {
-    const t = useTranslations('MegaMenu');
     const pathname = usePathname();
 
     // Check if current route is within a section
@@ -72,27 +70,27 @@ export function MegaMenu() {
 
     const components = [
         {
-            titleKey: "virtualTryOn",
+            title: "ভার্চুয়াল ট্রাই-অন",
             href: "/virtual-try-on",
-            descKey: "virtualTryOnDesc",
+            desc: "দেখুন ফ্রেম আপনার চেহারায় কেমন দেখায়",
             icon: <User className="w-4 h-4" />
         },
         {
-            titleKey: "findPower",
+            title: "পাওয়ার খুঁজুন",
             href: "/quiz",
-            descKey: "findPowerDesc",
+            desc: "আপনার জন্য সঠিক লেন্স পাওয়ার বের করুন",
             icon: <Smartphone className="w-4 h-4" />
         },
         {
-            titleKey: "theJournal",
+            title: "ব্লগ",
             href: "/blog",
-            descKey: "theJournalDesc",
+            desc: "চোখের যত্ন ও স্টাইল গাইড",
             icon: <BookOpen className="w-4 h-4" />
         },
         {
-            titleKey: "ourStory",
+            title: "আমাদের গল্প",
             href: "/about",
-            descKey: "ourStoryDesc",
+            desc: "কেন আমরা Smart Reading শুরু করলাম",
             icon: <HelpCircle className="w-4 h-4" />
         },
     ];
@@ -106,7 +104,7 @@ export function MegaMenu() {
             <NavigationMenuList className="gap-2">
                 <NavigationMenuItem>
                     <NavigationMenuTrigger className={cn(triggerBaseClass, isShopActive ? activeTriggerClass : inactiveTriggerClass)}>
-                        {t('shopTrigger')}
+                        শপ
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
                         <motion.ul
@@ -124,29 +122,29 @@ export function MegaMenu() {
                                         <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-500" />
                                         <Glasses className="h-8 w-8 text-primary mb-4 group-hover:scale-110 transition-transform duration-500" />
                                         <div className="mb-2 mt-4 text-lg font-bold text-foreground group-hover:text-primary transition-colors">
-                                            {t('shopCollectionTitle')}
+                                            কালেকশন দেখুন
                                         </div>
                                         <p className="text-sm leading-tight text-muted-foreground font-medium">
-                                            {t('shopCollectionDesc')}
+                                            আমাদের সব ফ্রেম ব্রাউজ করুন এবং পছন্দের জুড়ি খুঁজুন।
                                         </p>
                                     </Link>
                                 </NavigationMenuLink>
                             </li>
-                            <ListItem href="/shop?category=reading" title={t('readingGlasses')} icon={<Glasses className="w-4 h-4" />}>
-                                {t('readingGlassesDesc')}
+                            <ListItem href="/shop?category=reading" title="রিডিং গ্লাস" icon={<Glasses className="w-4 h-4" />}>
+                                বই, পত্রিকা এবং কাছের কাজের জন্য
                             </ListItem>
-                            <ListItem href="/shop?category=sunglasses" title={t('sunglassesTitle')} icon={<Sun className="w-4 h-4" />}>
-                                {t('sunglassesDesc')}
+                            <ListItem href="/shop?category=sunglasses" title="সানগ্লাস" icon={<Sun className="w-4 h-4" />}>
+                                স্টাইলের সাথে UV প্রোটেকশন
                             </ListItem>
-                            <ListItem href="/shop?category=computer" title={t('computerGlasses')} icon={<Monitor className="w-4 h-4" />}>
-                                {t('computerGlassesDesc')}
+                            <ListItem href="/shop?category=computer" title="কম্পিউটার গ্লাস" icon={<Monitor className="w-4 h-4" />}>
+                                স্ক্রিন টাইমের জন্য ব্লু লাইট ব্লকিং
                             </ListItem>
                         </motion.ul>
                     </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                     <NavigationMenuTrigger className={cn(triggerBaseClass, isExploreActive ? activeTriggerClass : inactiveTriggerClass)}>
-                        {t('exploreTrigger')}
+                        এক্সপ্লোর
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
                         <motion.ul
@@ -157,12 +155,12 @@ export function MegaMenu() {
                         >
                             {components.map((component) => (
                                 <ListItem
-                                    key={component.titleKey}
-                                    title={t(component.titleKey)}
+                                    key={component.title}
+                                    title={component.title}
                                     href={component.href}
                                     icon={component.icon}
                                 >
-                                    {t(component.descKey)}
+                                    {component.desc}
                                 </ListItem>
                             ))}
                         </motion.ul>
@@ -175,7 +173,7 @@ export function MegaMenu() {
                         isContactActive ? activeTriggerClass : inactiveTriggerClass
                     )}>
                         <Link href="/contact">
-                            {t('contactLink')}
+                            যোগাযোগ
                         </Link>
                     </NavigationMenuLink>
                 </NavigationMenuItem>

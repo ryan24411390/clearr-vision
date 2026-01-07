@@ -1,15 +1,12 @@
 "use client";
 
-import { useTranslations } from 'next-intl';
 import { Button } from "@/components/ui/button";
 import { Eye, ShoppingCart, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-
 import { PRODUCTS } from "@/lib/products";
 import { formatCurrency } from "@/lib/utils";
 import { Link } from "@/lib/navigation";
-import { useLocale } from "next-intl";
 import { useCartStore } from "@/lib/store/cart";
 
 // Stagger animation variants
@@ -37,8 +34,6 @@ const itemVariants = {
 };
 
 export function ProductShowcase() {
-    const t = useTranslations('Products');
-    const locale = useLocale();
     const featuredProducts = PRODUCTS.slice(0, 4);
     const addItem = useCartStore(state => state.addItem);
 
@@ -57,14 +52,14 @@ export function ProductShowcase() {
                     transition={{ duration: 0.6 }}
                 >
                     <span className="text-primary font-medium tracking-[0.2em] text-xs uppercase mb-4 block">
-                        {t('sectionBadge')}
+                        ফিচার্ড
                     </span>
                     <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground tracking-tight mb-6">
-                        {t('sectionTitle')}{' '}
-                        <span className="gradient-text-primary italic">{t('sectionTitleHighlight')}</span>
+                        আমাদের{' '}
+                        <span className="gradient-text-primary italic">বেস্ট সেলার</span>
                     </h2>
                     <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-                        {t('sectionDescription')}
+                        গ্রাহকরা যে ফ্রেমগুলো সবচেয়ে বেশি পছন্দ করেন। প্রিমিয়াম কোয়ালিটি, সাশ্রয়ী দামে।
                     </p>
                 </motion.div>
 
@@ -127,7 +122,7 @@ export function ProductShowcase() {
                                     {/* Badge for first product */}
                                     {index === 0 && (
                                         <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-semibold">
-                                            Best Seller
+                                            বেস্ট সেলার
                                         </div>
                                     )}
                                 </div>
@@ -139,13 +134,13 @@ export function ProductShowcase() {
                                     </h3>
                                     <div className="flex items-center justify-between">
                                         <p className="text-muted-foreground font-medium">
-                                            {formatCurrency(product.price, locale)}
+                                            {formatCurrency(product.price)}
                                         </p>
                                         <Link
                                             href={`/shop/${product.slug}`}
                                             className="text-sm text-primary opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1"
                                         >
-                                            View
+                                            দেখুন
                                             <ArrowRight className="w-3 h-3" />
                                         </Link>
                                     </div>
@@ -169,7 +164,7 @@ export function ProductShowcase() {
                             size="lg"
                             className="rounded-full border-border hover:border-primary hover:bg-primary hover:text-primary-foreground px-8 py-6 text-base transition-all duration-300"
                         >
-                            {t('viewAll')}
+                            সব চশমা দেখুন
                             <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>
                     </Link>

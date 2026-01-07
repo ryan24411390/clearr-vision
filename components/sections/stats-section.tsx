@@ -1,7 +1,5 @@
 "use client";
 
-import { useTranslations } from 'next-intl';
-
 export function StatsSection() {
     return (
         <section className="w-full py-20 bg-primary/5 border-t border-border/50">

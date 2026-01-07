@@ -5,14 +5,11 @@ import Image from "next/image";
 import { Link } from "@/lib/navigation";
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, Star } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 
 export function SmartReadingHero() {
-    const t = useTranslations("SmartReadingHero");
-
     return (
-        <section className="relative w-full overflow-hidden bg-background pt-32 pb-12 md:pt-40 md:pb-24 lg:pt-48 lg:pb-32">
+        <section className="relative w-full overflow-hidden bg-background pt-24 pb-8 md:pt-40 md:pb-24 lg:pt-48 lg:pb-32">
 
             {/* Background Decor */}
             <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[500px] h-[500px] rounded-full bg-teal-500/5 blur-[100px] pointer-events-none" />
@@ -37,9 +34,9 @@ export function SmartReadingHero() {
                             transition={{ duration: 0.6, delay: 0.1 }}
                         >
                             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.1]">
-                                {t('headline1')} <br />
+                                স্বচ্ছ দৃষ্টি। <br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-teal-400">
-                                    {t('headline2')}
+                                    সুন্দর জীবন।
                                 </span>
                             </h1>
                         </motion.div>
@@ -50,7 +47,7 @@ export function SmartReadingHero() {
                             transition={{ duration: 0.6, delay: 0.2 }}
                             className="text-lg md:text-xl text-muted-foreground leading-relaxed md:max-w-xl mx-auto lg:mx-0"
                         >
-                            {t('description')}
+                            ব্লু লাইট প্রোটেকশন সহ প্রিমিয়াম রিডিং গ্লাস। আরামের জন্য ডিজাইন করা, টেকসই গুণমান।
                         </motion.div>
 
                         <motion.div
@@ -61,13 +58,13 @@ export function SmartReadingHero() {
                         >
                             <Link href="/shop">
                                 <Button size="lg" className="h-14 px-8 rounded-full text-base font-semibold shadow-lg shadow-teal-500/20 hover:shadow-teal-500/30 transition-all">
-                                    {t('shopCollectionCta')}
+                                    কালেকশন দেখুন
                                     <ArrowRight className="w-5 h-5 ml-2" />
                                 </Button>
                             </Link>
                             <Link href="/about">
                                 <Button variant="outline" size="lg" className="h-14 px-8 rounded-full text-base border-2 hover:bg-secondary/50">
-                                    {t('howItWorksCta')}
+                                    কীভাবে কাজ করে
                                 </Button>
                             </Link>
                         </motion.div>
@@ -80,11 +77,11 @@ export function SmartReadingHero() {
                         >
                             <div className="flex items-center gap-2">
                                 <CheckCircle2 className="w-4 h-4 text-teal-500" />
-                                <span>{t('trustTrial')}</span>
+                                <span>৩০ দিনের ট্রায়াল</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <CheckCircle2 className="w-4 h-4 text-teal-500" />
-                                <span>{t('trustShipping')}</span>
+                                <span>ফ্রি শিপিং</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <div className="flex -space-x-1">
@@ -97,7 +94,7 @@ export function SmartReadingHero() {
                                 </div>
                                 <div className="flex items-center gap-1">
                                     <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                                    <span className="font-semibold text-foreground">{t('rating')}</span>
+                                    <span className="font-semibold text-foreground">৪.৯</span>
                                 </div>
                             </div>
                         </motion.div>

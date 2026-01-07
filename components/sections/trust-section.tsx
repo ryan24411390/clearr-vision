@@ -1,6 +1,5 @@
 "use client";
 
-import { useTranslations } from 'next-intl';
 import { Star, Quote } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -66,29 +65,26 @@ function TestimonialCard({
 }
 
 export function TrustSection() {
-    const t = useTranslations('Trust');
-    const testimonials = useTranslations('Testimonials');
-
     const TESTIMONIALS = [
         {
             id: 1,
-            name: "Rahim Ahmed",
-            roleKey: "businessOwner",
-            textKey: "review1",
+            name: "রহিম আহমেদ",
+            role: "ব্যবসায়ী",
+            text: "এই চশমা আমার কাজের ধরন বদলে দিয়েছে। কম্পিউটারে দীর্ঘ সময় কাজ করার পরও আর মাথা ব্যথা হয় না। ব্লু লাইট প্রোটেকশন সত্যিই কাজ করে!",
             rating: 5,
         },
         {
             id: 2,
-            name: "Shirin Akter",
-            roleKey: "teacher",
-            textKey: "review2",
+            name: "শিরিন আক্তার",
+            role: "শিক্ষিকা",
+            text: "খাতা দেখা আর লেসন প্রস্তুতিতে ঘণ্টার পর ঘণ্টা সময় কাটাই। এই রিডিং গ্লাস এতটাই আরামদায়ক যে ভুলেই যাই পরে আছি।",
             rating: 5,
         },
         {
             id: 3,
-            name: "Kamrul Hasan",
-            roleKey: "softwareEngineer",
-            textKey: "review3",
+            name: "কামরুল হাসান",
+            role: "সফটওয়্যার ইঞ্জিনিয়ার",
+            text: "স্টাইলিশ আর স্ক্রিন ক্লান্তি দূর করে এমন চশমা অবশেষে পেলাম। দামের তুলনায় কোয়ালিটি অসাধারণ।",
             rating: 5,
         },
     ];
@@ -108,13 +104,13 @@ export function TrustSection() {
                     transition={{ duration: 0.6 }}
                 >
                     <span className="text-primary font-medium tracking-[0.2em] text-xs uppercase mb-4 block">
-                        {t('badge')}
+                        কাস্টমার রিভিউ
                     </span>
                     <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight text-foreground">
-                        {t('title')}
+                        গ্রাহকরা কী বলছেন
                     </h2>
                     <p className="text-muted-foreground text-lg">
-                        {t('description')}
+                        যারা আমাদের বিশ্বাস করেছেন তাদের প্রকৃত অভিজ্ঞতা।
                     </p>
                 </motion.div>
 
@@ -135,8 +131,8 @@ export function TrustSection() {
                                 <TestimonialCard
                                     key={item.id}
                                     name={item.name}
-                                    role={testimonials(item.roleKey)}
-                                    text={testimonials(item.textKey)}
+                                    role={item.role}
+                                    text={item.text}
                                     rating={item.rating}
                                     index={index}
                                 />
@@ -146,8 +142,8 @@ export function TrustSection() {
                                 <TestimonialCard
                                     key={`dup-${item.id}`}
                                     name={item.name}
-                                    role={testimonials(item.roleKey)}
-                                    text={testimonials(item.textKey)}
+                                    role={item.role}
+                                    text={item.text}
                                     rating={item.rating}
                                     index={index + TESTIMONIALS.length}
                                 />
@@ -165,17 +161,17 @@ export function TrustSection() {
                     transition={{ delay: 0.3, duration: 0.6 }}
                 >
                     {[
-                        { value: "5,000+", labelKey: "statsCustomers" },
-                        { value: "4.9", labelKey: "statsRating" },
-                        { value: "99%", labelKey: "statsSatisfaction" },
-                        { value: "24/7", labelKey: "statsSupport" },
+                        { value: "৫,০০০+", label: "সন্তুষ্ট গ্রাহক" },
+                        { value: "৪.৯", label: "গড় রেটিং" },
+                        { value: "৯৯%", label: "সন্তুষ্টির হার" },
+                        { value: "২৪/৭", label: "কাস্টমার সাপোর্ট" },
                     ].map((stat, index) => (
                         <div key={index} className="text-center">
                             <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">
                                 {stat.value}
                             </div>
                             <div className="text-sm text-zinc-600 font-medium">
-                                {t(stat.labelKey)}
+                                {stat.label}
                             </div>
                         </div>
                     ))}

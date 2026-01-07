@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import MobileNav from "./mobile-nav";
 import { useState, useRef } from "react";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { CommandMenu } from "./command-menu";
 import { MegaMenu } from "./mega-menu";
 import { motion, useScroll, useMotionValueEvent, useTransform } from "framer-motion";
@@ -98,10 +97,6 @@ export default function Header() {
                             </motion.div>
                         </CommandMenu>
                     </div>
-
-                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <LanguageSwitcher />
-                    </motion.div>
 
                     {/* Custom Symbol - Order Inquiry Link */}
                     <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>

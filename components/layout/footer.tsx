@@ -2,40 +2,37 @@
 
 import { Link } from "@/lib/navigation";
 import { Facebook, Instagram, Linkedin, ArrowRight, Smartphone, ShieldCheck } from "lucide-react";
-import { useTranslations } from 'next-intl';
 import { motion } from "framer-motion";
 import Image from "next/image";
 
 export default function Footer() {
-    const t = useTranslations('Footer');
-
     const footerLinks = [
         {
-            title: t('shop'),
+            title: "শপ",
             links: [
-                { label: t('allGlasses'), href: "/shop" },
-                { label: t('reading'), href: "/shop?category=reading" },
-                { label: t('blueLight'), href: "/shop?category=blue-cut" },
-                { label: t('sunglasses'), href: "/shop?category=sunglasses" },
-                { label: t('accessories'), href: "/accessories" },
+                { label: "সব চশমা", href: "/shop" },
+                { label: "রিডিং গ্লাস", href: "/shop?category=reading" },
+                { label: "ব্লু লাইট", href: "/shop?category=blue-cut" },
+                { label: "সানগ্লাস", href: "/shop?category=sunglasses" },
+                { label: "এক্সেসরিজ", href: "/accessories" },
             ]
         },
         {
-            title: t('learn'),
+            title: "জানুন",
             links: [
-                { label: t('ourStory'), href: "/about" },
-                { label: t('theJournal'), href: "/blog" },
-                { label: t('lensTechnology'), href: "/technology" },
-                { label: t('fitGuide'), href: "/fit-guide" },
+                { label: "আমাদের গল্প", href: "/about" },
+                { label: "ব্লগ", href: "/blog" },
+                { label: "লেন্স টেকনোলজি", href: "/technology" },
+                { label: "ফিট গাইড", href: "/fit-guide" },
             ]
         },
         {
-            title: t('support'),
+            title: "সাপোর্ট",
             links: [
-                { label: t('faq'), href: "/faq" },
-                { label: t('shippingPolicy'), href: "/shipping" },
-                { label: t('refundPolicy'), href: "/refund" },
-                { label: t('contactUs'), href: "/contact" },
+                { label: "প্রশ্নোত্তর", href: "/faq" },
+                { label: "শিপিং পলিসি", href: "/shipping" },
+                { label: "রিটার্ন পলিসি", href: "/refund" },
+                { label: "যোগাযোগ", href: "/contact" },
             ]
         }
     ];
@@ -65,12 +62,12 @@ export default function Footer() {
                                 <div className="w-12 h-12 rounded-xl bg-card border border-border flex items-center justify-center text-primary mb-6">
                                     <Smartphone className="w-6 h-6" />
                                 </div>
-                                <h3 className="text-xl font-bold text-foreground mb-3">{t('virtualTryOnTitle')}</h3>
+                                <h3 className="text-xl font-bold text-foreground mb-3">ভার্চুয়াল ট্রাই-অন</h3>
                                 <p className="text-muted-foreground leading-relaxed mb-6 flex-1">
-                                    {t('virtualTryOnDesc')}
+                                    কেনার আগে দেখুন ফ্রেম আপনার চেহারায় কেমন দেখায়। শীঘ্রই আসছে।
                                 </p>
                                 <button className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors group/btn">
-                                    {t('launchMirror')}
+                                    মিরর চালু করুন
                                     <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
                                 </button>
                             </div>
@@ -102,7 +99,7 @@ export default function Footer() {
                         {/* Social Links */}
                         <div className="space-y-5">
                             <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider">
-                                {t('connect')}
+                                সংযুক্ত হোন
                             </h4>
                             <ul className="space-y-3">
                                 {socialLinks.map((social, index) => (
@@ -142,14 +139,14 @@ export default function Footer() {
                 <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-border text-xs text-muted-foreground">
                     <div className="flex items-center gap-2">
                         <ShieldCheck className="w-4 h-4 text-primary" />
-                        <span>{t('securePayments')}</span>
+                        <span>নিরাপদ পেমেন্ট</span>
                     </div>
                     <div className="flex flex-wrap justify-center gap-6">
                         <Link href="/privacy" className="hover:text-primary transition-colors">
-                            {t('privacyPolicy')}
+                            প্রাইভেসি পলিসি
                         </Link>
                         <Link href="/terms" className="hover:text-primary transition-colors">
-                            {t('termsOfService')}
+                            শর্তাবলী
                         </Link>
                         <span>© {new Date().getFullYear()} Smart Reading</span>
                     </div>

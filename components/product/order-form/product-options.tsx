@@ -34,17 +34,17 @@ export function ProductOptions({
     setErrors
 }: ProductOptionsProps) {
     return (
-        <div className="space-y-3">
+        <div className="space-y-5">
             <Label className="block">
-                <SectionHeader step="3" title="Color & Power" />
+                <SectionHeader step="৩" title="রঙ এবং পাওয়ার" />
             </Label>
-            <div className="grid grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 gap-6">
                 {/* Color Selection with Swatches */}
-                <div className="space-y-2">
-                    <Label htmlFor="color" className="text-sm font-medium">
-                        Frame Color <span className="text-muted-foreground">(রঙ)</span>
+                <div className="space-y-3" id="color">
+                    <Label htmlFor="color" className="text-sm font-medium text-muted-foreground">
+                        ফ্রেমের রঙ
                     </Label>
-                    <div className="flex flex-wrap gap-3">
+                    <div className="flex flex-wrap gap-4">
                         {product.availableColors.map((c) => (
                             <button
                                 key={c}
@@ -54,36 +54,42 @@ export function ProductOptions({
                                     setErrors(prev => ({ ...prev, color: "" }));
                                 }}
                                 className={cn(
-                                    "group relative h-10 w-10 rounded-full border-2 transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
-                                    color === c ? "border-primary ring-2 ring-primary ring-offset-2 scale-110" : "border-muted-foreground/30 hover:border-primary/50",
+                                    "group relative h-12 w-12 rounded-full border transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary/20",
+                                    color === c ? "ring-2 ring-primary ring-offset-2 ring-offset-background scale-110 shadow-lg" : "border-border/50 hover:border-primary/50 hover:scale-105",
                                     errors.color && touched.color && !color ? "ring-2 ring-destructive" : ""
                                 )}
                                 style={{ backgroundColor: colorMap[c] || c }}
                                 title={c}
                             >
                                 {color === c && (
-                                    <span className="absolute inset-0 flex items-center justify-center">
-                                        <Check className={cn("h-4 w-4 drop-shadow-md", ["White", "Silver", "Shining Silver"].includes(c) ? "text-black" : "text-white")} />
+                                    <span className="absolute inset-0 flex items-center justify-center animate-in fade-in zoom-in duration-200">
+                                        <Check className={cn("h-5 w-5 drop-shadow-md", ["White", "Silver", "Shining Silver"].includes(c) ? "text-black" : "text-white")} />
                                     </span>
                                 )}
                                 <span className="sr-only">{c}</span>
+
+                                {/* Tooltip-ish label on hover */}
+                                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-bold bg-foreground text-background px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
+                                    {c}
+                                </span>
                             </button>
                         ))}
                     </div>
                     {errors.color && touched.color && (
-                        <p className="text-xs text-destructive flex items-center gap-1 mt-1">
+                        <p className="text-xs text-destructive flex items-center gap-1 mt-1 animate-in slide-in-from-left-1">
                             <AlertCircle className="h-3 w-3" /> {errors.color}
                         </p>
                     )}
-                    <p className="text-xs text-muted-foreground mt-1">
-                        Selected: <span className="font-medium text-foreground">{color || "None"}</span>
+                    <p className="text-sm mt-1">
+                        <span className="text-muted-foreground">নির্বাচিত: </span>
+                        <span className="font-semibold text-primary">{color || "কোনটি নয়"}</span>
                     </p>
                 </div>
 
                 {/* Power Selection */}
-                <div className="space-y-2">
-                    <Label htmlFor="power" className="text-sm font-medium">
-                        Lens Power <span className="text-muted-foreground">(পাওয়ার)</span>
+                <div className="space-y-3">
+                    <Label htmlFor="power" className="text-sm font-medium text-muted-foreground">
+                        লেন্স পাওয়ার
                     </Label>
                     <Select
                         value={power}
@@ -95,20 +101,22 @@ export function ProductOptions({
                         <SelectTrigger
                             id="power"
                             className={cn(
-                                "h-12 bg-background/50 border-input/50 backdrop-blur-sm",
-                                errors.power && touched.power ? "border-destructive ring-destructive/20" : ""
+                                "h-14 bg-background/30 border-2 backdrop-blur-sm text-base transition-all duration-200",
+                                "hover:bg-background/50 hover:border-primary/30",
+                                "focus:ring-2 focus:ring-primary/20 focus:border-primary",
+                                errors.power && touched.power ? "border-destructive ring-destructive/20" : "border-border/50"
                             )}
                         >
-                            <SelectValue placeholder="Select Power (পাওয়ার বাছাই করুন)" />
+                            <SelectValue placeholder="পাওয়ার বাছাই করুন" />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent className="max-h-[300px]">
                             {product.availablePowers.map((p) => (
-                                <SelectItem key={p} value={p}>{p}</SelectItem>
+                                <SelectItem key={p} value={p} className="text-base py-3 cursor-pointer">{p}</SelectItem>
                             ))}
                         </SelectContent>
                     </Select>
                     {errors.power && touched.power && (
-                        <p className="text-xs text-destructive flex items-center gap-1">
+                        <p className="text-xs text-destructive flex items-center gap-1 animate-in slide-in-from-left-1">
                             <AlertCircle className="h-3 w-3" /> {errors.power}
                         </p>
                     )}

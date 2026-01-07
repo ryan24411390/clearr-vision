@@ -2,7 +2,6 @@
 
 import { Link } from "@/lib/navigation";
 import { Button } from "@/components/ui/button";
-import { useTranslations } from 'next-intl';
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { SheetClose } from "@/components/ui/sheet";
@@ -24,7 +23,6 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 function CartCount() {
     const itemCount = useCartStore(state => state.getItemCount());
@@ -39,7 +37,6 @@ function CartCount() {
 }
 
 export default function MobileNav() {
-    const t = useTranslations('MobileNav');
     const pathname = usePathname();
 
     const container = {
@@ -75,7 +72,6 @@ export default function MobileNav() {
                     </Link>
                 </SheetClose>
                 <div className="flex items-center gap-2">
-                    <LanguageSwitcher />
                     <SheetClose asChild>
                         <Button variant="ghost" size="icon" className="rounded-full hover:bg-foreground/5 text-foreground/70 hover:text-foreground">
                             <X className="h-5 w-5" />
@@ -92,17 +88,17 @@ export default function MobileNav() {
                 animate="show"
             >
                 <nav className="flex flex-col gap-2">
-                    <motion.p variants={item} className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-3">{t('menu')}</motion.p>
-                    <motion.div variants={item}><NavLink href="/" icon={<ShoppingBag className="w-5 h-5" />} active={pathname === '/'}>{t('home')}</NavLink></motion.div>
-                    <motion.div variants={item}><NavLink href="/shop" icon={<Glasses className="w-5 h-5" />} active={pathname.startsWith('/shop')}>{t('shopAllGlasses')}</NavLink></motion.div>
-                    <motion.div variants={item}><NavLink href="/quiz" icon={<Smartphone className="w-5 h-5" />} active={pathname.startsWith('/quiz')}>{t('findYourPower')}</NavLink></motion.div>
-                    <motion.div variants={item}><NavLink href="/virtual-try-on" icon={<User className="w-5 h-5" />} active={pathname.startsWith('/virtual-try-on')}>{t('virtualTryOn')}</NavLink></motion.div>
+                    <motion.p variants={item} className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-3">মেনু</motion.p>
+                    <motion.div variants={item}><NavLink href="/" icon={<ShoppingBag className="w-5 h-5" />} active={pathname === '/'}>হোম</NavLink></motion.div>
+                    <motion.div variants={item}><NavLink href="/shop" icon={<Glasses className="w-5 h-5" />} active={pathname.startsWith('/shop')}>সব চশমা</NavLink></motion.div>
+                    <motion.div variants={item}><NavLink href="/quiz" icon={<Smartphone className="w-5 h-5" />} active={pathname.startsWith('/quiz')}>পাওয়ার খুঁজুন</NavLink></motion.div>
+                    <motion.div variants={item}><NavLink href="/virtual-try-on" icon={<User className="w-5 h-5" />} active={pathname.startsWith('/virtual-try-on')}>ভার্চুয়াল ট্রাই-অন</NavLink></motion.div>
 
                     <motion.div variants={item} className="my-4 border-t border-border" />
 
-                    <motion.p variants={item} className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-3">{t('support')}</motion.p>
-                    <motion.div variants={item}><NavLink href="/about" icon={<HelpCircle className="w-5 h-5" />} active={pathname.startsWith('/about')}>{t('aboutUs')}</NavLink></motion.div>
-                    <motion.div variants={item}><NavLink href="/contact" icon={<Mail className="w-5 h-5" />} active={pathname.startsWith('/contact')}>{t('contact')}</NavLink></motion.div>
+                    <motion.p variants={item} className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-3">সাপোর্ট</motion.p>
+                    <motion.div variants={item}><NavLink href="/about" icon={<HelpCircle className="w-5 h-5" />} active={pathname.startsWith('/about')}>আমাদের সম্পর্কে</NavLink></motion.div>
+                    <motion.div variants={item}><NavLink href="/contact" icon={<Mail className="w-5 h-5" />} active={pathname.startsWith('/contact')}>যোগাযোগ</NavLink></motion.div>
                 </nav>
 
                 {/* Cart Quick Access */}
@@ -114,11 +110,11 @@ export default function MobileNav() {
                                     <ShoppingCart className="w-5 h-5" />
                                 </div>
                                 <div>
-                                    <p className="font-semibold text-sm text-foreground">{t('yourCart')}</p>
-                                    <p className="text-xs text-muted-foreground"><CartCount /> {t('items')}</p>
+                                    <p className="font-semibold text-sm text-foreground">আপনার কার্ট</p>
+                                    <p className="text-xs text-muted-foreground"><CartCount /> আইটেম</p>
                                 </div>
                             </div>
-                            <span className="text-xs font-medium text-primary group-hover:text-primary-foreground transition-colors">{t('viewCart')} →</span>
+                            <span className="text-xs font-medium text-primary group-hover:text-primary-foreground transition-colors">কার্ট দেখুন →</span>
                         </Link>
                     </SheetClose>
                 </motion.div>
@@ -130,14 +126,14 @@ export default function MobileNav() {
                             <div className="p-1.5 bg-green-500/10 rounded-full text-green-600 dark:text-green-400">
                                 <Smartphone className="w-4 h-4" />
                             </div>
-                            <h4 className="font-semibold text-sm text-foreground">{t('needHelp')}</h4>
+                            <h4 className="font-semibold text-sm text-foreground">সাহায্য দরকার?</h4>
                         </div>
                         <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
-                            {t('whatsappDesc')}
+                            তাৎক্ষণিক সাপোর্টের জন্য WhatsApp-এ চ্যাট করুন
                         </p>
                         <Button className="w-full bg-green-600 hover:bg-green-500 text-white h-9 text-xs font-medium rounded-lg transition-all" asChild>
                             <a href="https://wa.me/yournumber" target="_blank" rel="noopener noreferrer">
-                                {t('whatsappButton')}
+                                WhatsApp-এ চ্যাট করুন
                             </a>
                         </Button>
                     </div>
@@ -152,7 +148,7 @@ export default function MobileNav() {
                     <SocialLink href="#" icon={<Twitter className="w-5 h-5" />} label="Twitter" />
                 </div>
                 <p className="text-center text-[10px] text-muted-foreground mt-5 tracking-wide">
-                    © 2025 Smart Reading. All rights reserved.
+                    © 2025 Smart Reading. সর্বস্বত্ব সংরক্ষিত।
                 </p>
             </div>
         </div>

@@ -4,7 +4,6 @@ import { useState } from "react";
 import { QUIZ_QUESTIONS } from "@/lib/quiz-data";
 import QuizQuestion from "./QuizQuestion";
 import QuizResults from "./QuizResults";
-import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 
 import { AnimatePresence, motion } from "framer-motion";
@@ -12,7 +11,6 @@ import { AnimatePresence, motion } from "framer-motion";
 export default function QuizContainer() {
     const [currentStep, setCurrentStep] = useState(0);
     const [answers, setAnswers] = useState<Record<string, string>>({});
-    const t = useTranslations("Quiz");
 
     const handleAnswer = (answerId: string) => {
         const currentQuestion = QUIZ_QUESTIONS[currentStep];

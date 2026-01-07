@@ -1,14 +1,11 @@
 "use client";
 
-import { useTranslations } from 'next-intl';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Link } from '@/lib/navigation';
 import { motion } from "framer-motion";
 
 export function QuizCTASection() {
-    const t = useTranslations('QuizCTA');
-
     return (
         <section className="py-24 md:py-32 relative overflow-hidden bg-background">
             <div className="container mx-auto px-4 relative z-10">
@@ -54,7 +51,7 @@ export function QuizCTASection() {
                             transition={{ delay: 0.2 }}
                         >
                             <Sparkles className="w-4 h-4 text-primary" />
-                            <span className="text-muted-foreground tracking-wide">{t('badge')}</span>
+                            <span className="text-muted-foreground tracking-wide">Free Consultation</span>
                         </motion.div>
 
                         {/* Title */}
@@ -65,8 +62,8 @@ export function QuizCTASection() {
                             viewport={{ once: true }}
                             transition={{ delay: 0.3 }}
                         >
-                            {t('title')}{' '}
-                            <span className="gradient-text-primary">{t('titleHighlight')}</span>
+                            Find Your{' '}
+                            <span className="gradient-text-primary">Perfect Power</span>
                         </motion.h2>
 
                         {/* Description */}
@@ -77,7 +74,7 @@ export function QuizCTASection() {
                             viewport={{ once: true }}
                             transition={{ delay: 0.4 }}
                         >
-                            {t('description')}
+                            Answer three simple questions to get your recommended lens power. Takes less than 30 seconds.
                         </motion.p>
 
                         {/* CTA Button */}
@@ -92,7 +89,7 @@ export function QuizCTASection() {
                                     size="lg"
                                     className="h-14 px-8 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 text-base font-semibold glow-teal transition-all duration-300 group"
                                 >
-                                    {t('cta')}
+                                    Take the Quiz
                                     <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
                                 </Button>
                             </Link>

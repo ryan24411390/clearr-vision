@@ -1,7 +1,5 @@
 "use client";
 
-import { useTranslations } from 'next-intl';
-
 export function SocialProofSection() {
     return (
         <section className="w-full py-10 border-y border-border/50 bg-background/50 backdrop-blur-sm">

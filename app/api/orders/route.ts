@@ -1,17 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import { supabaseAdmin } from '@/lib/supabase/admin';
-
-interface OrderItem {
-    productId: string;
-    name: string;
-    price: number;
-    quantity: number;
-    variant?: {
-        color?: string;
-        power?: string;
-    };
-}
+import { createOrder, getOrders, OrderItem } from '@/lib/db/orders';
 
 interface CreateOrderPayload {
     orderType: 'direct' | 'cart';
@@ -50,33 +39,21 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Insert order into Supabase
-        const { data: order, error } = await supabaseAdmin
-            .from('orders')
-            .insert({
-                order_type: body.orderType || 'direct',
-                customer_name: body.customer.name,
-                customer_phone: body.customer.phone,
-                customer_address: body.customer.address,
-                customer_city: body.customer.city || null,
-                customer_area: body.customer.area || null,
-                delivery_location: body.deliveryLocation || null,
-                items: body.items,
-                subtotal: body.subtotal,
-                delivery_charge: body.deliveryCharge,
-                total: body.total,
-                payment_method: body.paymentMethod || 'COD',
-            })
-            .select()
-            .single();
-
-        if (error) {
-            console.error('Supabase error:', error);
-            return NextResponse.json(
-                { error: 'Failed to create order' },
-                { status: 500 }
-            );
-        }
+        // Create order using Supabase
+        const order = await createOrder({
+            order_type: body.orderType || 'direct',
+            customer_name: body.customer.name,
+            customer_phone: body.customer.phone,
+            customer_address: body.customer.address,
+            customer_city: body.customer.city || null,
+            customer_area: body.customer.area || null,
+            delivery_location: body.deliveryLocation || null,
+            items: body.items,
+            subtotal: body.subtotal,
+            delivery_charge: body.deliveryCharge,
+            total: body.total,
+            payment_method: body.paymentMethod || 'COD',
+        });
 
         console.log('Order created:', order.order_number);
 
@@ -88,7 +65,7 @@ export async function POST(request: NextRequest) {
     } catch (error) {
         console.error('Order creation error:', error);
         return NextResponse.json(
-            { error: 'Internal server error' },
+            { error: 'Failed to create order. Please try again.' },
             { status: 500 }
         );
     }
@@ -96,35 +73,25 @@ export async function POST(request: NextRequest) {
 
 // GET - List orders (admin only)
 export async function GET(request: NextRequest) {
-    // Verify admin token from cookie
-    const cookieStore = await cookies();
-    const adminToken = cookieStore.get('admin_token')?.value;
+    try {
+        // Verify admin token from cookie
+        const cookieStore = await cookies();
+        const adminToken = cookieStore.get('admin_token')?.value;
 
-    if (adminToken !== process.env.ADMIN_SECRET_TOKEN) {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+        if (adminToken !== process.env.ADMIN_SECRET_TOKEN) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
 
-    const { searchParams } = new URL(request.url);
-    const status = searchParams.get('status');
-    const limit = parseInt(searchParams.get('limit') || '50');
-    const offset = parseInt(searchParams.get('offset') || '0');
+        const { searchParams } = new URL(request.url);
+        const status = searchParams.get('status') || undefined;
+        const limit = parseInt(searchParams.get('limit') || '50');
+        const offset = parseInt(searchParams.get('offset') || '0');
 
-    let query = supabaseAdmin
-        .from('orders')
-        .select('*', { count: 'exact' })
-        .order('created_at', { ascending: false })
-        .range(offset, offset + limit - 1);
+        const { orders, total } = await getOrders({ status, limit, offset });
 
-    if (status && status !== 'all') {
-        query = query.eq('status', status);
-    }
-
-    const { data, error, count } = await query;
-
-    if (error) {
+        return NextResponse.json({ orders, total });
+    } catch (error) {
         console.error('Fetch orders error:', error);
         return NextResponse.json({ error: 'Failed to fetch orders' }, { status: 500 });
     }
-
-    return NextResponse.json({ orders: data, total: count });
 }

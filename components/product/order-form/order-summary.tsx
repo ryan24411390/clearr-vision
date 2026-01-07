@@ -1,7 +1,6 @@
 import { ArrowRight, Loader2, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/utils";
-import { useLocale } from "next-intl";
 
 interface OrderSummaryProps {
     qtyNum: number;
@@ -24,61 +23,86 @@ export function OrderSummary({
     handlePlaceOrder,
     submittingOrder,
 }: OrderSummaryProps) {
-    const locale = useLocale();
 
     return (
-        <div className="rounded-xl bg-gradient-to-br from-card to-muted border border-border p-6 shadow-xl">
-            <div className="space-y-3 mb-6">
-                <h4 className="font-semibold text-base mb-4">Order Summary</h4>
-                <div className="flex justify-between text-sm text-muted-foreground">
-                    <span>Subtotal ({qtyNum} {qtyNum > 1 ? 'pairs' : 'pair'})</span>
-                    <span className="text-foreground font-medium">{formatCurrency(subtotal, locale)}</span>
+        <div className="rounded-2xl bg-gradient-to-br from-white/5 to-white/10 dark:from-white/5 dark:to-white/5 border border-white/10 p-6 shadow-2xl relative overflow-hidden group">
+            <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+            <div className="space-y-4 mb-8 relative z-10">
+                <h4 className="font-bold text-lg mb-6 flex items-center gap-2">
+                    <span className="w-1 h-6 bg-primary rounded-full" />
+                    অর্ডার সামারি
+                </h4>
+                <div className="space-y-3">
+                    <div className="flex justify-between text-base text-muted-foreground">
+                        <span>সাবটোটাল ({qtyNum} {qtyNum > 1 ? 'পিস' : 'পিস'})</span>
+                        <span className="text-foreground font-medium">{formatCurrency(subtotal, "en")}</span>
+                    </div>
+                    <div className="flex justify-between text-base text-muted-foreground">
+                        <span>ডেলিভারি ({location === "inside" ? "ঢাকার ভিতরে" : "ঢাকার বাইরে"})</span>
+                        <span className={isFreeDelivery ? "text-green-500 font-bold" : "text-foreground font-medium"}>
+                            {isFreeDelivery ? "ফ্রি" : formatCurrency(deliveryCharge, "en")}
+                        </span>
+                    </div>
                 </div>
-                <div className="flex justify-between text-sm text-muted-foreground">
-                    <span>Delivery ({location === "inside" ? "Dhaka" : "Outside Dhaka"})</span>
-                    <span className={isFreeDelivery ? "text-green-500 font-bold" : "text-foreground font-medium"}>
-                        {isFreeDelivery ? "FREE" : formatCurrency(deliveryCharge, locale)}
-                    </span>
-                </div>
+
                 {isFreeDelivery && (
-                    <p className="text-xs text-green-500 flex items-center gap-1 bg-green-500/10 p-2 rounded-md">
-                        <Truck className="h-3 w-3" />
-                        Free delivery applied!
-                    </p>
+                    <div className="bg-green-500/10 border border-green-500/20 p-3 rounded-xl flex items-center gap-3 animate-in fade-in zoom-in duration-300">
+                        <div className="bg-green-500 text-white p-1 rounded-full">
+                            <Truck className="h-3 w-3" />
+                        </div>
+                        <p className="text-sm text-green-600 font-medium">
+                            অভিনন্দন! আপনি ফ্রি ডেলিভারি পাচ্ছেন
+                        </p>
+                    </div>
                 )}
-                <div className="border-t pt-3 mt-3">
-                    <div className="flex justify-between text-lg font-bold">
-                        <span>Total <span className="text-muted-foreground font-normal text-sm">(সর্বমোট)</span></span>
-                        <span className="text-primary">{formatCurrency(total, locale)}</span>
+
+                <div className="border-t border-border/50 pt-4 mt-4">
+                    <div className="flex justify-between items-end">
+                        <span className="text-lg font-bold text-muted-foreground">সর্বমোট</span>
+                        <span className="text-3xl font-bold text-primary tracking-tight">{formatCurrency(total, "en")}</span>
                     </div>
                 </div>
             </div>
 
             {/* Place Order Button */}
-            <Button
-                type="button"
-                onClick={handlePlaceOrder}
-                className="w-full text-lg font-bold py-6 bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-primary/20"
-                disabled={submittingOrder}
-            >
-                {submittingOrder ? (
-                    <span className="flex items-center gap-2">
-                        <Loader2 className="h-5 w-5 animate-spin" />
-                        Processing Order...
-                    </span>
-                ) : (
-                    <span className="flex items-center gap-2">
-                        Place Order (অর্ডার করুন)
-                        <ArrowRight className="h-5 w-5" />
-                    </span>
-                )}
-            </Button>
+            <div className="relative z-10">
+                <Button
+                    type="button"
+                    onClick={handlePlaceOrder}
+                    className="w-full text-lg font-bold py-7 rounded-xl bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 text-white shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:scale-[1.02] transition-all duration-300 group overflow-hidden"
+                    disabled={submittingOrder}
+                >
+                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
 
-            <div className="mt-4 flex flex-col items-center gap-2 text-xs text-muted-foreground">
-                <div className="flex items-center gap-4">
-                    <span className="flex items-center gap-1">💵 Cash on Delivery</span>
-                    <span className="w-1 h-1 rounded-full bg-muted-foreground"></span>
-                    <span className="flex items-center gap-1">↩️ 7-day return</span>
+                    <span className="relative flex items-center gap-2">
+                        {submittingOrder ? (
+                            <>
+                                <Loader2 className="h-5 w-5 animate-spin" />
+                                প্রসেস হচ্ছে...
+                            </>
+                        ) : (
+                            <>
+                                অর্ডার কনফার্ম করুন
+                                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                            </>
+                        )}
+                    </span>
+                </Button>
+            </div>
+
+            <div className="mt-6 flex justify-center gap-4 text-[10px] md:text-xs text-muted-foreground font-medium opacity-70">
+                <div className="flex items-center gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-green-500" />
+                    ক্যাশ অন ডেলিভারি
+                </div>
+                <div className="flex items-center gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-blue-500" />
+                    ৭ দিনে রিটার্ন
+                </div>
+                <div className="flex items-center gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-purple-500" />
+                    জেনুইন প্রোডাক্ট
                 </div>
             </div>
         </div>

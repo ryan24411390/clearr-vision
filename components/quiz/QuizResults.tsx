@@ -1,6 +1,5 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import { calculatePower, QUIZ_QUESTIONS } from "@/lib/quiz-data";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/lib/navigation";
@@ -15,7 +14,6 @@ import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 
 export default function QuizResults({ answers, onRetake }: QuizResultsProps) {
-    const t = useTranslations("Quiz");
     const [calculating, setCalculating] = useState(true);
 
     // Calculate results
@@ -59,7 +57,7 @@ export default function QuizResults({ answers, onRetake }: QuizResultsProps) {
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ type: "spring", bounce: 0.5 }}
             >
-                <h2 className="text-3xl font-bold mb-2">{t("result")}</h2>
+                <h2 className="text-3xl font-bold mb-2">Your Recommendation</h2>
                 <p className="text-muted-foreground">Based on your age and daily habits</p>
             </motion.div>
 
@@ -77,11 +75,11 @@ export default function QuizResults({ answers, onRetake }: QuizResultsProps) {
             <div className="flex flex-col gap-4 w-full max-w-sm mt-4">
                 <Button size="lg" asChild className="w-full text-lg h-14 rounded-full shadow-lg shadow-primary/20">
                     <Link href={`/shop?power=${power}`}>
-                        {t("shopRecommended")}
+                        Shop Recommended Glasses
                     </Link>
                 </Button>
                 <Button variant="ghost" onClick={onRetake} className="hover:bg-transparent hover:text-primary">
-                    {t("back")} / Retake Analysis
+                    Back / Retake Analysis
                 </Button>
             </div>
         </div>

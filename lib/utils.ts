@@ -5,14 +5,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatCurrency(amount: number | string, locale: string = 'en') {
+export function formatCurrency(amount: number | string, locale: string = 'bn') {
   const numericAmount = typeof amount === 'string' ? parseFloat(amount.replace(/[^0-9.]/g, '')) : amount;
 
-  if (locale === 'bn') {
-    return `৳ ${numericAmount.toLocaleString('bn-BD')}`;
-  }
-
-  return `৳ ${numericAmount.toLocaleString('en-US')}`;
+  // Bengali-only formatting
+  return `৳ ${numericAmount.toLocaleString('bn-BD')}`;
 }
 
 

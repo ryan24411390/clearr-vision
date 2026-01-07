@@ -4,11 +4,8 @@ import Image from "next/image";
 import { BentoGrid, BentoItem } from "@/components/ui/bento-grid";
 import { motion } from "framer-motion";
 import { Sparkles, ShieldCheck, Truck, Leaf } from "lucide-react";
-import { useTranslations } from 'next-intl';
 
 export function BentoShowcase() {
-    const t = useTranslations('Bento');
-
     return (
         <section className="py-24 md:py-32 bg-background relative overflow-hidden">
             {/* Subtle ambient glow */}
@@ -24,11 +21,11 @@ export function BentoShowcase() {
                     transition={{ duration: 0.6 }}
                 >
                     <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 text-foreground">
-                        {t('sectionTitle')}{' '}
-                        <span className="gradient-text-primary italic">{t('sectionTitleHighlight')}</span>
+                        Built{' '}
+                        <span className="gradient-text-primary italic">Different</span>
                     </h2>
                     <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-                        {t('sectionDescription')}
+                        Every pair is made with precision optics and premium materials for lasting quality.
                     </p>
                 </motion.div>
 
@@ -63,9 +60,9 @@ export function BentoShowcase() {
                                 <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 group-hover:bg-primary/30 transition-colors">
                                     <Sparkles className="w-7 h-7 text-primary" />
                                 </div>
-                                <h3 className="text-2xl md:text-3xl font-bold mb-3 text-foreground">{t('crystalTitle')}</h3>
+                                <h3 className="text-2xl md:text-3xl font-bold mb-3 text-foreground">Crystal Clear Optics</h3>
                                 <p className="text-muted-foreground max-w-md text-base leading-relaxed">
-                                    {t('crystalDescription')}
+                                    High-definition lenses with anti-reflective coating for sharp, distortion-free vision.
                                 </p>
                             </motion.div>
                         </div>
@@ -81,8 +78,8 @@ export function BentoShowcase() {
                                 <ShieldCheck className="w-6 h-6 text-primary" />
                             </motion.div>
                             <div className="mt-4">
-                                <h3 className="text-xl font-bold mb-2 text-foreground">{t('impactTitle')}</h3>
-                                <p className="text-sm text-muted-foreground">{t('impactDescription')}</p>
+                                <h3 className="text-xl font-bold mb-2 text-foreground">Impact Resistant</h3>
+                                <p className="text-sm text-muted-foreground">Durable frames and scratch-resistant lenses built to last.</p>
                             </div>
                         </div>
                     </BentoItem>
@@ -97,8 +94,8 @@ export function BentoShowcase() {
                                 <Leaf className="w-6 h-6 text-primary" />
                             </motion.div>
                             <div className="mt-4">
-                                <h3 className="text-xl font-bold mb-2 text-foreground">{t('ecoTitle')}</h3>
-                                <p className="text-sm text-muted-foreground">{t('ecoDescription')}</p>
+                                <h3 className="text-xl font-bold mb-2 text-foreground">Eco-Friendly</h3>
+                                <p className="text-sm text-muted-foreground">Sustainable materials and recyclable packaging.</p>
                             </div>
                         </div>
                     </BentoItem>
@@ -114,8 +111,8 @@ export function BentoShowcase() {
                                 <Truck className="w-8 h-8 text-primary" />
                             </motion.div>
                             <div>
-                                <h3 className="text-xl font-bold mb-2 text-foreground">{t('deliveryTitle')}</h3>
-                                <p className="text-muted-foreground">{t('deliveryDescription')}</p>
+                                <h3 className="text-xl font-bold mb-2 text-foreground">Fast Delivery</h3>
+                                <p className="text-muted-foreground">Free shipping nationwide. Most orders arrive within 2-3 business days.</p>
                             </div>
                         </div>
                     </BentoItem>
