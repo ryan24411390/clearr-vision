@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/components/ui/toast";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone, MessageCircle } from "lucide-react";
 
 export default function ContactPage() {
     const toast = useToast();
@@ -48,8 +48,20 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <h3 className="font-bold text-lg mb-1">Phone</h3>
-                                        <a href="tel:+8801234567890" className="text-muted-foreground hover:text-primary transition-colors">
-                                            +880 1234 567 890
+                                        <a href="tel:0175466566" className="text-muted-foreground hover:text-primary transition-colors">
+                                            0175466566
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-start gap-4">
+                                    <div className="p-3 bg-primary/10 rounded-lg text-primary">
+                                        <MessageCircle className="w-6 h-6" />
+                                    </div>
+                                    <div>
+                                        <h3 className="font-bold text-lg mb-1">WhatsApp</h3>
+                                        <a href="https://wa.me/880175466566" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                                            0175466566
                                         </a>
                                     </div>
                                 </div>
@@ -61,10 +73,23 @@ export default function ContactPage() {
                                     <div>
                                         <h3 className="font-bold text-lg mb-1">Visit Us</h3>
                                         <p className="text-muted-foreground leading-relaxed">
-                                            123 Vision Street, <br />
-                                            Dhaka, Bangladesh
+                                            BNS Center, <br />
+                                            Sector 7, Uttara, Dhaka
                                         </p>
                                     </div>
+                                </div>
+
+                                <div className="w-full h-[300px] rounded-lg overflow-hidden border bg-muted">
+                                    <iframe
+                                        src="https://maps.google.com/maps?q=BNS+Center+Sector+7+Uttara+Dhaka&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                        width="100%"
+                                        height="100%"
+                                        style={{ border: 0 }}
+                                        allowFullScreen
+                                        loading="lazy"
+                                        referrerPolicy="no-referrer-when-downgrade"
+                                        title="BNS Center Location"
+                                    ></iframe>
                                 </div>
                             </div>
                         </div>

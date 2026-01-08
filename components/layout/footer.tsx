@@ -47,35 +47,10 @@ export default function Footer() {
         <footer className="bg-card border-t border-border">
             <div className="container px-4 py-16 md:py-24 mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 mb-20">
-                    {/* Feature Card - Virtual Try-On */}
-                    <div className="lg:col-span-4">
-                        <motion.div
-                            className="relative rounded-2xl p-8 bg-muted border border-border h-full overflow-hidden group hover:border-primary/30 transition-colors duration-500"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                        >
-                            {/* Glow effect */}
-                            <div className="absolute top-0 right-0 w-48 h-48 bg-primary/10 blur-[80px] rounded-full group-hover:bg-primary/20 transition-all duration-500 pointer-events-none" />
 
-                            <div className="relative z-10 flex flex-col h-full">
-                                <div className="w-12 h-12 rounded-xl bg-card border border-border flex items-center justify-center text-primary mb-6">
-                                    <Smartphone className="w-6 h-6" />
-                                </div>
-                                <h3 className="text-xl font-bold text-foreground mb-3">ভার্চুয়াল ট্রাই-অন</h3>
-                                <p className="text-muted-foreground leading-relaxed mb-6 flex-1">
-                                    কেনার আগে দেখুন ফ্রেম আপনার চেহারায় কেমন দেখায়। শীঘ্রই আসছে।
-                                </p>
-                                <button className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors group/btn">
-                                    মিরর চালু করুন
-                                    <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                                </button>
-                            </div>
-                        </motion.div>
-                    </div>
 
                     {/* Links Grid */}
-                    <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-4">
+                    <div className="lg:col-span-12 grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-4">
                         {footerLinks.map((section, index) => (
                             <div key={index} className="space-y-5">
                                 <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider">

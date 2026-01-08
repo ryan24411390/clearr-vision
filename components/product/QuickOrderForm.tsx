@@ -23,7 +23,7 @@ export function QuickOrderForm({ product }: QuickOrderFormProps) {
     return (
         <div className="bg-white dark:bg-zinc-900 rounded-[2rem] shadow-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden max-w-md mx-auto relative">
             {/* Top Funnel: Product Focus */}
-            <div className="bg-gradient-to-b from-primary/5 to-transparent pt-8 pb-6 px-6 relative">
+            <div className="bg-primary/10 pt-8 pb-6 px-6 relative">
                 <div className="absolute top-4 right-4 flex flex-col gap-2">
                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800">
                         ক্যাশ অন ডেলিভারি
@@ -37,7 +37,7 @@ export function QuickOrderForm({ product }: QuickOrderFormProps) {
 
                 <div className="flex flex-col items-center text-center gap-4">
                     <div className="relative group">
-                        <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-teal-500/20 rounded-full blur-xl opacity-50 group-hover:opacity-100 transition duration-500"></div>
+                        <div className="absolute -inset-4 bg-primary/20 rounded-full blur-xl opacity-50 group-hover:opacity-100 transition duration-500"></div>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src={product.images[0]}

@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductOrderForm } from "@/components/product/product-order-form";
 import { ProductHero } from "@/components/product/product-hero";
-import { ProductFeatures } from "@/components/product/product-features";
+
 import { MobileStickyBar } from "@/components/product/mobile-sticky-bar";
 import { ProductRelated } from "@/components/product/product-related";
 import { TrackProductView } from "@/components/product/TrackProductView";
@@ -47,10 +47,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                             <ProductGallery images={product.images} />
                         </div>
 
-                        <Separator />
 
-                        {/* B. Visual Features & Description */}
-                        <ProductFeatures description={product.description} />
 
                         <Separator />
 

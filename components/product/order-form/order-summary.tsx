@@ -70,7 +70,7 @@ export function OrderSummary({
                 <Button
                     type="button"
                     onClick={handlePlaceOrder}
-                    className="w-full text-lg font-bold py-7 rounded-xl bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 text-white shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:scale-[1.02] transition-all duration-300 group overflow-hidden"
+                    className="w-full text-lg font-bold py-7 rounded-xl bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:scale-[1.02] transition-all duration-300 group overflow-hidden"
                     disabled={submittingOrder}
                 >
                     <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />

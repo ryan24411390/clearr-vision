@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { Link } from "@/lib/navigation";
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, Star } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function SmartReadingHero() {
@@ -69,35 +69,7 @@ export function SmartReadingHero() {
                             </Link>
                         </motion.div>
 
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.6, delay: 0.4 }}
-                            className="pt-4 flex items-center justify-center lg:justify-start gap-8 text-sm text-muted-foreground"
-                        >
-                            <div className="flex items-center gap-2">
-                                <CheckCircle2 className="w-4 h-4 text-teal-500" />
-                                <span>৩০ দিনের ট্রায়াল</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <CheckCircle2 className="w-4 h-4 text-teal-500" />
-                                <span>ফ্রি শিপিং</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <div className="flex -space-x-1">
-                                    {[1, 2, 3, 4].map(i => (
-                                        <div key={i} className="w-8 h-8 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center overflow-hidden">
-                                            {/* Handing avatars or placeholders */}
-                                            <div className="w-full h-full bg-zinc-300" />
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="flex items-center gap-1">
-                                    <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                                    <span className="font-semibold text-foreground">৪.৯</span>
-                                </div>
-                            </div>
-                        </motion.div>
+
                     </div>
 
                     {/* Right Column: Visual */}
