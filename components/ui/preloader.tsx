@@ -9,16 +9,25 @@ export default function Preloader() {
 
     useEffect(() => {
         const handleLoad = () => {
-            // Extended delay for the "heavy" cinematic feel
-            setTimeout(() => setIsLoading(false), 800);
+            // Short delay for smooth transition
+            setTimeout(() => setIsLoading(false), 500);
         };
+
+        // Fallback: Always hide preloader after max 3 seconds
+        const fallbackTimer = setTimeout(() => {
+            setIsLoading(false);
+        }, 3000);
 
         if (document.readyState === "complete") {
             handleLoad();
         } else {
             window.addEventListener("load", handleLoad);
-            return () => window.removeEventListener("load", handleLoad);
         }
+
+        return () => {
+            clearTimeout(fallbackTimer);
+            window.removeEventListener("load", handleLoad);
+        };
     }, []);
 
     const text = "Smart Reading";
