@@ -15,7 +15,7 @@ function getResendClient(): Resend | null {
 
 // Admin notification email
 const ADMIN_EMAIL = 'smaartreading@gmail.com';
-const FROM_EMAIL = 'Clearr Vision <onboarding@resend.dev>'; // Default Resend email for testing
+const FROM_EMAIL = 'Clearr Vision <noreply@send.smaartreading.com>'; // Verified domain
 
 export interface OrderEmailData {
   orderNumber: string;
