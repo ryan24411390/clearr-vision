@@ -67,6 +67,8 @@ export function ProductOrderForm({ product }: ProductOrderFormProps) {
                             setColor={setters.setColor}
                             power={state.power}
                             setPower={setters.setPower}
+                            age={state.age}
+                            setAge={setters.setAge}
                             errors={state.errors}
                             touched={state.touched}
                             setErrors={setters.setErrors}

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { createOrder, getOrders, OrderItem } from '@/lib/db/orders';
+import { sendOrderNotificationEmail } from '@/lib/email/resend';
 
 interface CreateOrderPayload {
     orderType: 'direct' | 'cart';
@@ -56,6 +57,31 @@ export async function POST(request: NextRequest) {
         });
 
         console.log('Order created:', order.order_number);
+
+        // Send email notification to admin (non-blocking)
+        sendOrderNotificationEmail({
+            orderNumber: order.order_number,
+            customerName: body.customer.name,
+            customerPhone: body.customer.phone,
+            customerAddress: body.customer.address,
+            customerCity: body.customer.city || null,
+            customerArea: body.customer.area || null,
+            deliveryLocation: body.deliveryLocation || null,
+            items: body.items,
+            subtotal: body.subtotal,
+            deliveryCharge: body.deliveryCharge,
+            total: body.total,
+            paymentMethod: body.paymentMethod || 'COD',
+            createdAt: order.created_at || new Date().toISOString(),
+        }).then((result) => {
+            if (result.success) {
+                console.log('Order notification email sent for:', order.order_number);
+            } else {
+                console.warn('Failed to send order notification email:', result.error);
+            }
+        }).catch((error) => {
+            console.error('Email notification error:', error);
+        });
 
         return NextResponse.json({
             success: true,

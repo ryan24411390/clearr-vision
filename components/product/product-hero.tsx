@@ -26,7 +26,7 @@ export function ProductHero({ product }: ProductHeroProps) {
     return (
         <section className="relative w-full min-h-[85vh] flex flex-col lg:flex-row bg-zinc-50 dark:bg-zinc-950 overflow-hidden">
             {/* Left: Content */}
-            <div className="flex-1 flex flex-col justify-center px-6 lg:px-20 py-20 z-10 relative">
+            <div className="flex-1 flex flex-col justify-center px-6 lg:px-20 py-10 lg:py-20 z-10 relative">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -79,7 +79,7 @@ export function ProductHero({ product }: ProductHeroProps) {
                         </Button>
                     </div>
 
-                    <div className="mt-12 flex items-center gap-8 text-sm font-medium text-zinc-500">
+                    <div className="mt-6 lg:mt-12 flex items-center gap-8 text-sm font-medium text-zinc-500">
                         <div className="flex items-center gap-2">
                             <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                             In Stock & Ready to Ship

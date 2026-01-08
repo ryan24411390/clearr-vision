@@ -111,6 +111,10 @@
     font-feature-settings: "ss01", "ss02", "cv01";
   }
 
+  p {
+    @apply text-lg font-medium;
+  }
+
   /* Smooth scrolling with reduced motion respect */
   html {
     scroll-behavior: smooth;

@@ -8,7 +8,7 @@ import { ProductRelated } from "@/components/product/product-related";
 import { TrackProductView } from "@/components/product/TrackProductView";
 import { PRODUCTS } from "@/lib/products";
 import { Check, ShieldCheck, Truck } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
+
 
 // This is required for static export if enabled
 export async function generateStaticParams() {
@@ -49,26 +49,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
 
 
-                        <Separator />
 
-                        {/* C. Specifications Table */}
-                        <div className="space-y-6">
-                            <h3 className="text-2xl font-bold">টেকনিক্যাল স্পেসিফিকেশন</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-                                {Object.entries(product.attributes).map(([key, value]) => {
-                                    if (!value || (Array.isArray(value) && value.length === 0)) return null;
-                                    const label = key.replace(/([A-Z])/g, " $1").replace(/^./, str => str.toUpperCase());
-                                    const displayValue = Array.isArray(value) ? value.join(", ") : value;
-
-                                    return (
-                                        <div key={key} className="flex justify-between py-3 border-b border-zinc-100 dark:border-zinc-800">
-                                            <span className="text-muted-foreground font-medium">{label}</span>
-                                            <span className="font-semibold text-foreground text-right">{displayValue}</span>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </div>
 
                         {/* D. Shipping Info (Visual) */}
                         <div className="bg-zinc-50 dark:bg-zinc-900 rounded-2xl p-8 space-y-6">

@@ -324,7 +324,7 @@ export function QuickOrderModal({ product, isOpen, onClose }: QuickOrderModalPro
 
                         <div className="space-y-1.5">
                             <Label htmlFor="quick-power" className="text-sm font-medium">
-                                লেন্স পাওয়ার <span className="text-red-500">*</span>
+                                আপনার চোখের পাওয়ার সিলেক্ট করুন: <span className="text-red-500">*</span>
                             </Label>
                             <Select
                                 value={power}

@@ -8,6 +8,7 @@ export interface FormErrors {
     location?: string;
     color?: string;
     power?: string;
+    age?: string;
     customerName?: string;
     phoneNumber?: string;
     address?: string;
@@ -22,6 +23,7 @@ export function useOrderForm(product: Product) {
     const [location, setLocation] = useState<"inside" | "outside">("inside");
     const [color, setColor] = useState<string>("");
     const [power, setPower] = useState<string>("");
+    const [age, setAge] = useState<string>("");
 
     // Customer Details States
     const [customerName, setCustomerName] = useState("");
@@ -69,6 +71,9 @@ export function useOrderForm(product: Product) {
             case "power":
                 if (!value) error = "পাওয়ার নির্বাচন করুন";
                 break;
+            case "age":
+                if (power === "Don't know power" && !value) error = "বয়স নির্বাচন করুন";
+                break;
             case "customerName":
                 if (!value.trim()) error = "নাম লিখুন";
                 break;
@@ -95,8 +100,11 @@ export function useOrderForm(product: Product) {
         const powerError = validateField("power", power);
         if (powerError) newErrors.power = powerError;
 
+        const ageError = validateField("age", age);
+        if (ageError) newErrors.age = ageError;
+
         setErrors(prev => ({ ...prev, ...newErrors }));
-        setTouched(prev => ({ ...prev, color: true, power: true }));
+        setTouched(prev => ({ ...prev, color: true, power: true, age: true }));
 
         if (Object.keys(newErrors).length > 0) {
             toast.error("সব অপশন নির্বাচন করুন");
@@ -138,7 +146,8 @@ export function useOrderForm(product: Product) {
             field === "phoneNumber" ? phoneNumber :
                 field === "address" ? address :
                     field === "color" ? color :
-                        field === "power" ? power : "";
+                        field === "power" ? power :
+                            field === "age" ? age : "";
 
         const error = validateField(field, value);
         setErrors(prev => ({
@@ -152,7 +161,7 @@ export function useOrderForm(product: Product) {
         if (errorFields.length === 0) return;
 
         // Priority order for scrolling (top to bottom)
-        const fieldOrder: (keyof FormErrors)[] = ['color', 'power', 'customerName', 'phoneNumber', 'address'];
+        const fieldOrder: (keyof FormErrors)[] = ['color', 'power', 'age', 'customerName', 'phoneNumber', 'address'];
 
         for (const field of fieldOrder) {
             if (currentErrors[field]) {
@@ -187,6 +196,7 @@ export function useOrderForm(product: Product) {
             // Re-run validation logic locally to get immediate error object
             if (!color) currentErrors.color = "রঙ নির্বাচন করুন";
             if (!power) currentErrors.power = "পাওয়ার নির্বাচন করুন";
+            if (power === "Don't know power" && !age) currentErrors.age = "বয়স নির্বাচন করুন";
             if (!customerName.trim()) currentErrors.customerName = "নাম লিখুন";
             if (!phoneNumber.trim()) currentErrors.phoneNumber = "ফোন নম্বর লিখুন";
             else if (!/^01[3-9]\d{8}$/.test(phoneNumber.replace(/\s+/g, ''))) currentErrors.phoneNumber = "সঠিক ফোন নম্বর দিন";
@@ -208,6 +218,7 @@ export function useOrderForm(product: Product) {
                     address: address,
                 },
                 deliveryLocation: location === "inside" ? "ঢাকার ভিতরে" : "ঢাকার বাইরে",
+                customerAge: age, // Send age with the order if captured
                 items: [{
                     productId: product.id,
                     name: product.name,
@@ -286,6 +297,7 @@ export function useOrderForm(product: Product) {
             location,
             color,
             power,
+            age,
             customerName,
             phoneNumber,
             address,
@@ -298,6 +310,7 @@ export function useOrderForm(product: Product) {
             setLocation,
             setColor,
             setPower,
+            setAge,
             setCustomerName,
             setPhoneNumber,
             setAddress,

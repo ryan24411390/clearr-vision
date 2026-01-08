@@ -18,6 +18,8 @@ interface ProductOptionsProps {
     setColor: (c: string) => void;
     power: string;
     setPower: (p: string) => void;
+    age?: string;
+    setAge?: (a: string) => void;
     errors: FormErrors;
     touched: Record<string, boolean>;
     setErrors: React.Dispatch<React.SetStateAction<FormErrors>>;
@@ -29,6 +31,8 @@ export function ProductOptions({
     setColor,
     power,
     setPower,
+    age,
+    setAge,
     errors,
     touched,
     setErrors
@@ -121,6 +125,44 @@ export function ProductOptions({
                         </p>
                     )}
                 </div>
+
+                {/* Age Selection - Conditional */}
+                {power === "Don't know power" && setAge && (
+                    <div className="space-y-3 animate-in fade-in slide-in-from-top-2 duration-300">
+                        <Label htmlFor="age" className="text-sm font-medium text-muted-foreground">
+                            আপনার বয়স (Age)
+                        </Label>
+                        <Select
+                            value={age}
+                            onValueChange={(v) => {
+                                setAge(v);
+                                setErrors(prev => ({ ...prev, age: "" }));
+                            }}
+                        >
+                            <SelectTrigger
+                                id="age"
+                                className={cn(
+                                    "h-14 bg-background/30 border-2 backdrop-blur-sm text-base transition-all duration-200",
+                                    "hover:bg-background/50 hover:border-primary/30",
+                                    "focus:ring-2 focus:ring-primary/20 focus:border-primary",
+                                    errors.age && touched.age ? "border-destructive ring-destructive/20" : "border-border/50"
+                                )}
+                            >
+                                <SelectValue placeholder="বয়স বাছাই করুন" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {["30-40", "40-50", "50-60", "60-70", "70-80", "80-90"].map((a) => (
+                                    <SelectItem key={a} value={a} className="text-base py-3 cursor-pointer">{a}</SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                        {errors.age && touched.age && (
+                            <p className="text-xs text-destructive flex items-center gap-1 animate-in slide-in-from-left-1">
+                                <AlertCircle className="h-3 w-3" /> {errors.age}
+                            </p>
+                        )}
+                    </div>
+                )}
             </div>
         </div>
     );
