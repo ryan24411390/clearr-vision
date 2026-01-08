@@ -1,7 +1,17 @@
 import { Resend } from 'resend';
 
-// Initialize Resend client
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy-initialize Resend client to avoid build-time errors
+let resend: Resend | null = null;
+
+function getResendClient(): Resend | null {
+  if (!process.env.RESEND_API_KEY) {
+    return null;
+  }
+  if (!resend) {
+    resend = new Resend(process.env.RESEND_API_KEY);
+  }
+  return resend;
+}
 
 // Admin notification email
 const ADMIN_EMAIL = 'smaartreading@gmail.com';
@@ -140,14 +150,16 @@ function generateOrderEmailHtml(data: OrderEmailData): string {
 }
 
 export async function sendOrderNotificationEmail(orderData: OrderEmailData): Promise<{ success: boolean; error?: string }> {
-  // Check if Resend API key is configured
-  if (!process.env.RESEND_API_KEY) {
+  // Get the Resend client (lazily initialized)
+  const client = getResendClient();
+
+  if (!client) {
     console.warn('RESEND_API_KEY not configured. Skipping email notification.');
     return { success: false, error: 'Email service not configured' };
   }
 
   try {
-    const { data, error } = await resend.emails.send({
+    const { data, error } = await client.emails.send({
       from: FROM_EMAIL,
       to: [ADMIN_EMAIL],
       subject: `🛒 New Order #${orderData.orderNumber} - ${orderData.customerName}`,

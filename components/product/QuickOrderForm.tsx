@@ -69,7 +69,7 @@ export function QuickOrderForm({ product }: QuickOrderFormProps) {
                     />
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2 border-t border-border/40">
+                <div className="space-y-5 pt-2 border-t border-border/40">
                     <QuantitySelector
                         quantity={state.quantity}
                         setQuantity={setters.setQuantity}
