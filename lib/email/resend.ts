@@ -154,9 +154,15 @@ export async function sendOrderNotificationEmail(orderData: OrderEmailData): Pro
   const client = getResendClient();
 
   if (!client) {
-    console.warn('RESEND_API_KEY not configured. Skipping email notification.');
-    return { success: false, error: 'Email service not configured' };
+    console.error('[Email] RESEND_API_KEY not configured. Cannot send email notification.');
+    console.error('[Email] Please add RESEND_API_KEY to your environment variables.');
+    return { success: false, error: 'Email service not configured - missing RESEND_API_KEY' };
   }
+
+  console.log('[Email] Attempting to send order notification email...');
+  console.log('[Email] From:', FROM_EMAIL);
+  console.log('[Email] To:', ADMIN_EMAIL);
+  console.log('[Email] Order:', orderData.orderNumber);
 
   try {
     const { data, error } = await client.emails.send({
@@ -167,14 +173,14 @@ export async function sendOrderNotificationEmail(orderData: OrderEmailData): Pro
     });
 
     if (error) {
-      console.error('Failed to send order notification email:', error);
+      console.error('[Email] Resend API error:', JSON.stringify(error, null, 2));
       return { success: false, error: error.message };
     }
 
-    console.log('Order notification email sent successfully:', data?.id);
+    console.log('[Email] Email sent successfully! ID:', data?.id);
     return { success: true };
   } catch (error) {
-    console.error('Error sending order notification email:', error);
+    console.error('[Email] Exception while sending email:', error);
     return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
   }
 }
