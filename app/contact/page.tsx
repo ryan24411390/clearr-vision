@@ -36,8 +36,8 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <h3 className="font-bold text-lg mb-1">Email</h3>
-                                        <a href="mailto:support@clearrvision.com" className="text-muted-foreground hover:text-primary transition-colors">
-                                            support@clearrvision.com
+                                        <a href="mailto:smaartreading@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">
+                                            smaartreading@gmail.com
                                         </a>
                                     </div>
                                 </div>
