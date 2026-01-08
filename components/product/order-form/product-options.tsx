@@ -93,7 +93,7 @@ export function ProductOptions({
                 {/* Power Selection */}
                 <div className="space-y-3">
                     <Label htmlFor="power" className="text-sm font-medium text-muted-foreground">
-                        লেন্স পাওয়ার
+                        আপনার পাওয়ার নির্বাচন করুন
                     </Label>
                     <Select
                         value={power}
