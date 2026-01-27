@@ -35,6 +35,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
             <MobileStickyBar price={product.price} originalPrice={product.originalPrice} />
 
+            {/* Mobile Order Form Section - Moved directly after Hero */}
+            <div className="lg:hidden container mx-auto px-4 mt-4 mb-12" id="mobile-order-form">
+                <div className="mb-4">
+                    <h3 className="text-2xl font-bold mb-4">অর্ডার সম্পন্ন করুন</h3>
+                </div>
+                <ProductOrderForm product={product} />
+            </div>
+
             <div className="container mx-auto px-4 py-16 relative">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
 
@@ -42,7 +50,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                     <div className="lg:col-span-7 space-y-16">
 
                         {/* A. Gallery for Detailed View */}
-                        <div id="gallery" className="scroll-mt-24">
+                        <div id="gallery" className="scroll-mt-24 hidden lg:block">
                             <h3 className="text-2xl font-bold mb-6">গ্যালারি</h3>
                             <ProductGallery images={product.images} />
                         </div>
@@ -99,21 +107,13 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                             </div>
                         </div>
                     </div>
-
-                    {/* Mobile Order Form Section (Lives at bottom naturally or above related) */}
-                    <div className="lg:hidden col-span-1" id="mobile-order-form">
-                        <div className="mb-4">
-                            <h3 className="text-2xl font-bold mb-4">অর্ডার সম্পন্ন করুন</h3>
-                        </div>
-                        <ProductOrderForm product={product} />
-                    </div>
-
                 </div>
 
-                {/* Related Products Section */}
-                <div className="mt-32">
-                    <ProductRelated currentSlug={slug} products={PRODUCTS} />
-                </div>
+            </div>
+
+            {/* Related Products Section */}
+            <div className="mt-32">
+                <ProductRelated currentSlug={slug} products={PRODUCTS} />
             </div>
         </div>
     );

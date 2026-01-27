@@ -6,6 +6,7 @@ import { Product } from "@/lib/products";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, ShoppingBag, Star } from "lucide-react";
+import { ProductGallery } from "@/components/product/ProductGallery";
 
 interface ProductHeroProps {
     product: Product;
@@ -24,9 +25,9 @@ export function ProductHero({ product }: ProductHeroProps) {
     };
 
     return (
-        <section className="relative w-full min-h-[85vh] flex flex-col lg:flex-row bg-zinc-50 dark:bg-zinc-950 overflow-hidden">
+        <section className="relative w-full min-h-fit lg:min-h-[85vh] flex flex-col-reverse lg:flex-row bg-zinc-50 dark:bg-zinc-950 overflow-hidden -mt-20">
             {/* Left: Content */}
-            <div className="flex-1 flex flex-col justify-center px-6 lg:px-20 py-10 lg:py-20 z-10 relative">
+            <div className="flex-1 flex flex-col justify-center px-6 lg:px-20 py-6 lg:py-20 z-10 relative">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -71,7 +72,7 @@ export function ProductHero({ product }: ProductHeroProps) {
 
                         <Button
                             size="lg"
-                            className="rounded-full px-8 h-14 text-base font-bold shadow-xl shadow-primary/20 hover:shadow-primary/40 transition-all hover:scale-105"
+                            className="rounded-full px-8 h-14 text-base font-bold shadow-xl shadow-primary/20 hover:shadow-primary/40 transition-all hover:scale-105 hidden lg:flex"
                             onClick={scrollToOrder}
                         >
                             <ShoppingBag className="mr-2 h-5 w-5" />
@@ -92,27 +93,35 @@ export function ProductHero({ product }: ProductHeroProps) {
                 </motion.div>
             </div>
 
-            {/* Right: Immersive Image */}
-            <div className="flex-1 relative min-h-[50vh] lg:min-h-auto">
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-50/20 to-transparent lg:bg-gradient-to-l lg:from-transparent lg:to-zinc-50/10 z-10" />
+            {/* Right: Immersive Image (Desktop) & Gallery (Mobile) */}
+            <div className="flex-1 relative lg:h-auto lg:min-h-auto">
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-50/20 to-transparent lg:bg-gradient-to-l lg:from-transparent lg:to-zinc-50/10 z-10 pointer-events-none" />
 
-                {/* Decorative blob */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-500/5 blur-3xl rounded-full" />
+                {/* Mobile Gallery */}
+                <div className="lg:hidden w-full p-6 pb-0">
+                    <ProductGallery images={product.images} />
+                </div>
 
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9, x: 50 }}
-                    animate={{ opacity: 1, scale: 1, x: 0 }}
-                    transition={{ duration: 1, delay: 0.2 }}
-                    className="relative w-full h-full"
-                >
-                    <Image
-                        src={product.images[0]}
-                        alt={product.name}
-                        fill
-                        className="object-cover object-center lg:object-contain"
-                        priority
-                    />
-                </motion.div>
+                {/* Desktop Immersive Image */}
+                <div className="hidden lg:block relative w-full h-full min-h-[50vh]">
+                    {/* Decorative blob */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-500/5 blur-3xl rounded-full" />
+
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9, x: 50 }}
+                        animate={{ opacity: 1, scale: 1, x: 0 }}
+                        transition={{ duration: 1, delay: 0.2 }}
+                        className="relative w-full h-full"
+                    >
+                        <Image
+                            src={product.images[0]}
+                            alt={product.name}
+                            fill
+                            className="object-cover object-center lg:object-contain"
+                            priority
+                        />
+                    </motion.div>
+                </div>
             </div>
 
             {/* Scroll Indicator */}
@@ -120,7 +129,7 @@ export function ProductHero({ product }: ProductHeroProps) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1, duration: 1 }}
-                className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 cursor-pointer"
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-2 cursor-pointer hidden lg:flex"
                 onClick={() => {
                     window.scrollTo({ top: window.innerHeight * 0.8, behavior: 'smooth' });
                 }}
